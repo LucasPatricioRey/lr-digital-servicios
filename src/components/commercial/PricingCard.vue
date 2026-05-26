@@ -1,4 +1,6 @@
 <script setup>
+import { CheckCircle2, Wrench } from "@lucide/vue";
+
 defineProps({
   plan: {
     type: Object,
@@ -9,19 +11,40 @@ defineProps({
 
 <template>
   <article :class="['pricing-card', 'glass-panel', { 'is-highlighted': plan.highlighted }]">
-    <h3>{{ plan.title }}</h3>
-    <strong>{{ plan.price }}</strong>
+    <div class="pricing-card__top">
+      <span class="pricing-card__icon" aria-hidden="true">
+        <Wrench :size="20" :stroke-width="2.5" />
+      </span>
+      <div>
+        <h3>{{ plan.title }}</h3>
+        <strong>{{ plan.price }}</strong>
+      </div>
+    </div>
     <ul>
-      <li v-for="item in plan.includes" :key="item">{{ item }}</li>
+      <li v-for="item in plan.includes" :key="item">
+        <CheckCircle2 :size="16" :stroke-width="2.6" aria-hidden="true" />
+        <span>{{ item }}</span>
+      </li>
     </ul>
   </article>
 </template>
 
 <style scoped>
 .pricing-card {
+  position: relative;
+  overflow: hidden;
   min-height: 100%;
   border-radius: 22px;
   padding: 24px;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(93, 214, 255, 0.32);
 }
 
 .pricing-card.is-highlighted {
@@ -31,14 +54,31 @@ defineProps({
     var(--panel);
 }
 
+.pricing-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.pricing-card__icon {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--accent-cold);
+  background: rgba(93, 214, 255, 0.1);
+}
+
 h3 {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   font-size: 1.28rem;
 }
 
 strong {
   display: block;
-  margin-bottom: 20px;
   color: var(--accent-cold);
   font-size: 1.18rem;
 }
@@ -51,20 +91,16 @@ ul {
 }
 
 li {
-  position: relative;
-  padding-left: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
   color: var(--muted);
   line-height: 1.6;
 }
 
-li::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-soft);
+li svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--accent-soft);
 }
 </style>

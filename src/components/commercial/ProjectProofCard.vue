@@ -1,4 +1,6 @@
 <script setup>
+import { ExternalLink, Layers3 } from "@lucide/vue";
+
 defineProps({
   project: {
     type: Object,
@@ -15,7 +17,12 @@ defineProps({
 
     <div class="proof-card__body">
       <p class="proof-card__type">{{ project.type }}</p>
-      <h3>{{ project.title }}</h3>
+      <div class="proof-card__title-row">
+        <span class="proof-card__icon" aria-hidden="true">
+          <Layers3 :size="20" :stroke-width="2.5" />
+        </span>
+        <h3>{{ project.title }}</h3>
+      </div>
       <p class="proof-card__description">{{ project.description }}</p>
 
       <div class="proof-card__use">
@@ -46,7 +53,8 @@ defineProps({
           rel="noopener noreferrer"
           aria-label="Abrir demo del proyecto"
         >
-          Ver demo
+          <span>Ver demo</span>
+          <ExternalLink :size="16" :stroke-width="2.5" aria-hidden="true" />
         </a>
       </div>
     </div>
@@ -55,16 +63,34 @@ defineProps({
 
 <style scoped>
 .proof-card {
+  position: relative;
   display: grid;
   min-height: 100%;
   overflow: hidden;
   border-radius: 24px;
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.proof-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(93, 214, 255, 0.28);
 }
 
 .proof-card__media {
+  position: relative;
   min-height: 190px;
   border-bottom: 1px solid rgba(168, 180, 200, 0.14);
   background: rgba(255, 255, 255, 0.04);
+}
+
+.proof-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(7, 17, 31, 0.68));
+  opacity: 0.75;
 }
 
 .proof-card__media img {
@@ -72,6 +98,11 @@ defineProps({
   height: 100%;
   max-height: 250px;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.proof-card:hover .proof-card__media img {
+  transform: scale(1.04);
 }
 
 .proof-card__body {
@@ -91,6 +122,23 @@ defineProps({
 
 h3 {
   font-size: 1.35rem;
+}
+
+.proof-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.proof-card__icon {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--accent-cold);
+  background: rgba(93, 214, 255, 0.1);
 }
 
 .proof-card__description,
@@ -156,6 +204,9 @@ h3 {
 }
 
 .proof-card__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border-radius: 12px;
   border: 1px solid rgba(168, 180, 200, 0.2);
   padding: 10px 13px;
@@ -171,5 +222,13 @@ h3 {
   transform: translateY(-2px);
   border-color: rgba(255, 184, 108, 0.42);
   background: rgba(255, 255, 255, 0.06);
+}
+
+.proof-card__links a svg {
+  transition: transform 0.2s ease;
+}
+
+.proof-card__links a:hover svg {
+  transform: translate(2px, -2px);
 }
 </style>

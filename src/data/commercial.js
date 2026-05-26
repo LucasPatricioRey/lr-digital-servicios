@@ -4,6 +4,21 @@ export const heroBadges = [
   "Entrega clara"
 ];
 
+export const heroMetrics = [
+  {
+    value: "3 a 7 dias",
+    label: "landing simple"
+  },
+  {
+    value: "100%",
+    label: "adaptado a celular"
+  },
+  {
+    value: "WhatsApp",
+    label: "consulta directa"
+  }
+];
+
 export const businessBenefits = [
   "Mostras que vendes sin depender solo de Instagram.",
   "El cliente puede escribirte directo por WhatsApp.",
@@ -14,6 +29,7 @@ export const businessBenefits = [
 export const services = [
   {
     title: "Presencia Digital Inicial",
+    icon: "MonitorSmartphone",
     price: "Desde $220.000",
     idealFor: "Negocios que quieren empezar online sin complicarse.",
     includes: [
@@ -26,6 +42,7 @@ export const services = [
   },
   {
     title: "Web Profesional para Negocio",
+    icon: "BadgeCheck",
     price: "Desde $350.000",
     highlighted: true,
     idealFor: "Negocios que quieren verse mas serios y confiables.",
@@ -40,6 +57,7 @@ export const services = [
   },
   {
     title: "Catalogo con WhatsApp",
+    icon: "ShoppingBag",
     price: "Desde $390.000",
     highlighted: true,
     idealFor: "Locales, estetica, ropa, comida, servicios y emprendimientos.",
@@ -53,12 +71,14 @@ export const services = [
   },
   {
     title: "Menu Digital",
+    icon: "ScanLine",
     price: "Desde $200.000",
     idealFor: "Restaurantes, cafeterias, bares y emprendimientos gastronomicos.",
     includes: ["QR para mesas y redes", "Categorias", "Platos/productos", "Precios", "Contacto"]
   },
   {
     title: "Tienda Online Inicial",
+    icon: "CreditCard",
     price: "Desde $790.000",
     idealFor: "Negocios que quieren empezar a vender online.",
     includes: [
@@ -71,6 +91,7 @@ export const services = [
   },
   {
     title: "Sistema Simple a Medida",
+    icon: "Settings2",
     price: "Desde $850.000",
     note: "Cotizacion segun alcance",
     idealFor: "Negocios que necesitan ordenar procesos internos.",
