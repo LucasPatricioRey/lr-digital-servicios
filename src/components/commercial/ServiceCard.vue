@@ -79,8 +79,8 @@ const serviceIcon = computed(() => iconMap[props.service.icon] || MonitorSmartph
   min-height: 100%;
   flex-direction: column;
   gap: 22px;
-  border-radius: 22px;
-  padding: 24px;
+  border-radius: 8px;
+  padding: 22px;
 }
 
 .service-card__shine {
@@ -125,7 +125,7 @@ const serviceIcon = computed(() => iconMap[props.service.icon] || MonitorSmartph
   height: 48px;
   place-items: center;
   border: 1px solid rgba(93, 214, 255, 0.22);
-  border-radius: 16px;
+  border-radius: 8px;
   color: var(--accent-cold);
   background: rgba(93, 214, 255, 0.09);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -208,7 +208,7 @@ li::before {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 13px;
+  border-radius: 6px;
   padding: 12px 14px;
   color: #06101c;
   background: linear-gradient(135deg, #25d366, #8fffb7);

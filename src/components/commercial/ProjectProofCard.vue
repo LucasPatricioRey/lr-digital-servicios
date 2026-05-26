@@ -67,7 +67,7 @@ defineProps({
   display: grid;
   min-height: 100%;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 8px;
   transition:
     transform 0.24s ease,
     border-color 0.24s ease;
@@ -136,7 +136,7 @@ h3 {
   height: 42px;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: 14px;
+  border-radius: 8px;
   color: var(--accent-cold);
   background: rgba(93, 214, 255, 0.1);
 }
@@ -207,7 +207,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid rgba(168, 180, 200, 0.2);
   padding: 10px 13px;
   color: var(--text);

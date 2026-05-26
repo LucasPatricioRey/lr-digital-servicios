@@ -40,7 +40,7 @@ const stepIcon = computed(() => icons[props.number - 1] || ClipboardList);
   position: relative;
   overflow: hidden;
   min-height: 100%;
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 22px;
   transition:
     transform 0.22s ease,
@@ -84,7 +84,7 @@ span {
   width: 42px;
   height: 42px;
   place-items: center;
-  border-radius: 14px;
+  border-radius: 8px;
   color: #07111f;
   background: linear-gradient(135deg, var(--accent-soft), #fff0c2);
   font-size: 0.92rem;

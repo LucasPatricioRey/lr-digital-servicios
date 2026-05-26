@@ -35,7 +35,7 @@ import WhatsAppButton from "./WhatsAppButton.vue";
 .commercial-cta__panel {
   position: relative;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 8px;
   padding: clamp(28px, 5vw, 56px);
   text-align: center;
   background:
@@ -67,7 +67,7 @@ import WhatsAppButton from "./WhatsAppButton.vue";
   height: 56px;
   place-items: center;
   margin-bottom: 18px;
-  border-radius: 18px;
+  border-radius: 8px;
   color: var(--accent-soft);
   background: rgba(255, 184, 108, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
@@ -102,7 +102,7 @@ h2 {
   justify-content: center;
   gap: 8px;
   border: 1px solid rgba(168, 180, 200, 0.24);
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 14px 18px;
   font-weight: 850;
   transition:

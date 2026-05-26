@@ -24,7 +24,7 @@ defineProps({
 
 <style scoped>
 .faq-item {
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 0;
   overflow: hidden;
   transition:
@@ -60,7 +60,7 @@ summary::-webkit-details-marker {
   width: 34px;
   height: 34px;
   place-items: center;
-  border-radius: 12px;
+  border-radius: 6px;
   color: var(--accent-cold);
   background: rgba(93, 214, 255, 0.1);
 }

@@ -34,8 +34,8 @@ defineProps({
   position: relative;
   overflow: hidden;
   min-height: 100%;
-  border-radius: 22px;
-  padding: 24px;
+  border-radius: 8px;
+  padding: 22px;
   transition:
     transform 0.22s ease,
     border-color 0.22s ease,
@@ -67,7 +67,7 @@ defineProps({
   height: 42px;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: 14px;
+  border-radius: 8px;
   color: var(--accent-cold);
   background: rgba(93, 214, 255, 0.1);
 }

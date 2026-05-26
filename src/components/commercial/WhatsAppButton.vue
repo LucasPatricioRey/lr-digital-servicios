@@ -46,8 +46,8 @@ const whatsappUrl = computed(() => getWhatsappUrl(props.message || undefined));
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 14px;
-  padding: 14px 18px;
+  border-radius: 6px;
+  padding: 13px 16px;
   font-weight: 850;
   line-height: 1.1;
   transition:
@@ -95,8 +95,8 @@ const whatsappUrl = computed(() => getWhatsappUrl(props.message || undefined));
 
 .whatsapp-icon {
   display: inline-grid;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   place-items: center;
   border-radius: 50%;
   color: #06101c;

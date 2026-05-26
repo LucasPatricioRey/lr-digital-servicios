@@ -5,21 +5,21 @@ import {
   BadgeCheck,
   CalendarCheck,
   CheckCircle2,
+  Clock3,
+  FileText,
   MapPin,
   MessageCircle,
-  MousePointerClick,
   SearchCheck,
-  Share2,
-  ShoppingBag,
+  ShieldCheck,
   Sparkles,
-  Store
+  Store,
+  Target,
+  TrendingUp
 } from "@lucide/vue";
 import { businessConfig } from "../config/business";
 import {
   businessBenefits,
   faqs,
-  heroBadges,
-  heroMetrics,
   industries,
   maintenancePlans,
   processSteps,
@@ -37,6 +37,8 @@ import WhatsAppButton from "../components/commercial/WhatsAppButton.vue";
 const hasEmail = computed(
   () => businessConfig.email && businessConfig.email !== "AGREGAR_EMAIL"
 );
+
+const featuredServices = computed(() => services.slice(0, 3));
 
 const setMeta = (selector, content) => {
   const element = document.querySelector(selector);
@@ -60,12 +62,10 @@ onMounted(() => {
 
 <template>
   <div class="commercial-page">
-    <div class="animated-surface" aria-hidden="true"></div>
-
     <header class="commercial-nav" aria-label="Navegacion principal">
       <a class="commercial-logo" href="/" aria-label="Ir al inicio">
-        <span>{{ businessConfig.brandName }}</span>
-        <small>{{ businessConfig.businessName }}</small>
+        <span>Lucas Rey</span>
+        <small>LR Digital</small>
       </a>
 
       <nav>
@@ -79,118 +79,101 @@ onMounted(() => {
     </header>
 
     <main>
-      <section id="inicio" class="services-hero">
-        <div class="services-hero__copy">
+      <section id="inicio" class="hero-section">
+        <div class="hero-content">
           <p class="section-kicker">
-            <Sparkles :size="15" :stroke-width="2.6" aria-hidden="true" />
-            Webs para negocios
-          </p>
-          <h1>Tu negocio mas profesional y listo para recibir consultas</h1>
-          <p class="services-hero__intro">
-            Creo webs, catalogos y menus digitales para que tus clientes vean que
-            ofreces, donde estas y te escriban por WhatsApp sin vueltas.
+            <Sparkles :size="15" :stroke-width="2.5" aria-hidden="true" />
+            Servicios digitales para negocios
           </p>
 
-          <div class="services-hero__actions">
-            <WhatsAppButton />
+          <h1>Webs y catalogos profesionales para recibir mas consultas</h1>
+
+          <p class="hero-lead">
+            Diseno paginas web, menus, catalogos y sistemas simples para que tus clientes
+            entiendan que ofreces y te escriban por WhatsApp.
+          </p>
+
+          <div class="hero-actions">
+            <WhatsAppButton label="Pedir propuesta" />
             <a href="#servicios" class="action action--secondary">
-              <span>Ver precios</span>
-              <ArrowRight :size="18" :stroke-width="2.7" aria-hidden="true" />
+              <span>Ver servicios</span>
+              <ArrowRight :size="18" :stroke-width="2.6" aria-hidden="true" />
             </a>
           </div>
 
-          <ul class="services-hero__badges" aria-label="Beneficios principales">
-            <li v-for="badge in heroBadges" :key="badge">
-              <BadgeCheck :size="15" :stroke-width="2.7" aria-hidden="true" />
-              <span>{{ badge }}</span>
-            </li>
-          </ul>
-
-          <div class="hero-metrics" aria-label="Datos destacados del servicio">
-            <article v-for="metric in heroMetrics" :key="metric.label">
-              <strong>{{ metric.value }}</strong>
-              <span>{{ metric.label }}</span>
-            </article>
+          <div class="trust-strip" aria-label="Beneficios principales">
+            <span>
+              <ShieldCheck :size="17" :stroke-width="2.5" aria-hidden="true" />
+              Propuesta sin compromiso
+            </span>
+            <span>
+              <Clock3 :size="17" :stroke-width="2.5" aria-hidden="true" />
+              Entrega ordenada
+            </span>
+            <span>
+              <MessageCircle :size="17" :stroke-width="2.5" aria-hidden="true" />
+              WhatsApp, mapa y redes
+            </span>
           </div>
         </div>
 
-        <div class="services-hero__visual" aria-label="Ejemplo visual de web comercial">
-          <div class="mockup-card glass-panel">
-            <div class="mockup-card__bar">
-              <span></span>
-              <span></span>
-              <span></span>
-              <p>Catalogo digital</p>
-            </div>
-
-            <div class="mockup-card__screen">
-              <div class="mockup-card__status">
-                <span class="live-dot" aria-hidden="true"></span>
-                Web lista para recibir consultas
-              </div>
-
-              <div class="mockup-card__headline">
-                <span>Negocio local</span>
-                <strong>Servicios, precios y contacto claro</strong>
-              </div>
-
-              <div class="mockup-card__grid">
-                <article>
-                  <MessageCircle :size="20" :stroke-width="2.5" aria-hidden="true" />
-                  <small>WhatsApp</small>
-                  <b>Consulta directa</b>
-                </article>
-                <article>
-                  <MapPin :size="20" :stroke-width="2.5" aria-hidden="true" />
-                  <small>Google Maps</small>
-                  <b>Ubicacion visible</b>
-                </article>
-                <article>
-                  <ShoppingBag :size="20" :stroke-width="2.5" aria-hidden="true" />
-                  <small>Catalogo</small>
-                  <b>Productos ordenados</b>
-                </article>
-                <article>
-                  <Share2 :size="20" :stroke-width="2.5" aria-hidden="true" />
-                  <small>Redes</small>
-                  <b>Instagram y links</b>
-                </article>
-              </div>
-
-              <div class="mockup-card__footer">
-                <div>
-                  <small>Proxima accion</small>
-                  <b>Cliente toca y escribe</b>
-                </div>
-                <div class="mockup-card__cta">
-                  Pedir propuesta
-                  <MousePointerClick :size="17" :stroke-width="2.6" aria-hidden="true" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="quick-proof glass-panel">
-            <Store :size="24" :stroke-width="2.4" aria-hidden="true" />
+        <aside class="proposal-panel" aria-label="Vista previa de propuesta comercial">
+          <div class="proposal-panel__header">
             <div>
               <span>LR Digital</span>
-              <strong>Propuesta clara, precio definido y entrega ordenada.</strong>
+              <strong>Plan recomendado</strong>
+            </div>
+            <p>Web + WhatsApp</p>
+          </div>
+
+          <div class="proposal-panel__score">
+            <div>
+              <small>Objetivo</small>
+              <strong>Mas consultas calificadas</strong>
+            </div>
+            <TrendingUp :size="28" :stroke-width="2.4" aria-hidden="true" />
+          </div>
+
+          <div class="proposal-panel__services">
+            <article v-for="service in featuredServices" :key="service.title">
+              <span>{{ service.title }}</span>
+              <strong>{{ service.price }}</strong>
+            </article>
+          </div>
+
+          <div class="proposal-panel__timeline">
+            <div>
+              <CheckCircle2 :size="18" :stroke-width="2.6" aria-hidden="true" />
+              Relevamiento
+            </div>
+            <div>
+              <FileText :size="18" :stroke-width="2.6" aria-hidden="true" />
+              Propuesta clara
+            </div>
+            <div>
+              <MapPin :size="18" :stroke-width="2.6" aria-hidden="true" />
+              Publicacion online
             </div>
           </div>
-        </div>
+        </aside>
       </section>
 
-      <section class="business-context">
+      <section class="context-section">
         <div>
-          <p class="section-kicker">Por que importa</p>
-          <h2>Tu cliente decide rapido si confiar o seguir de largo</h2>
-        </div>
-        <div class="business-context__content">
-          <p>
-            Hoy muchas personas miran Instagram, Google o una web antes de consultar. Si
-            tu negocio no muestra claro que ofrece, donde esta y como contactarte, podes
-            perder clientes.
+          <p class="section-kicker">
+            <Target :size="15" :stroke-width="2.5" aria-hidden="true" />
+            Por que importa
           </p>
+          <h2>Si tu negocio no se entiende rapido, el cliente sigue de largo.</h2>
+        </div>
+
+        <div class="context-section__content">
+          <p>
+            La web no tiene que ser complicada. Tiene que mostrar que vendes, cuanto
+            cuesta, donde estas y como contactarte. Eso baja dudas y mejora la confianza
+            antes del primer mensaje.
+          </p>
+
           <ul>
             <li v-for="benefit in businessBenefits" :key="benefit">
               <CheckCircle2 :size="18" :stroke-width="2.6" aria-hidden="true" />
@@ -201,49 +184,55 @@ onMounted(() => {
       </section>
 
       <section id="servicios" class="services-section">
-        <p class="section-kicker">Servicios principales</p>
-        <h2 class="section-title">Elegi por donde empezar</h2>
-        <p class="section-subtitle">
-          Los precios son desde y sirven para orientarte. Antes de empezar te paso una
-          propuesta concreta con alcance, tiempo de entrega y que incluye.
-        </p>
+        <div class="section-heading">
+          <p class="section-kicker">Servicios</p>
+          <h2 class="section-title">Soluciones concretas para vender, mostrar o gestionar mejor</h2>
+          <p class="section-subtitle">
+            Precios desde, alcance claro y entrega organizada. Antes de empezar definimos
+            que incluye, tiempos y condiciones.
+          </p>
+        </div>
 
         <div class="services-grid">
           <ServiceCard v-for="service in services" :key="service.title" :service="service" />
         </div>
       </section>
 
-      <section class="recommended-service">
-        <div class="recommended-service__panel glass-panel">
-          <p class="section-kicker">Servicio recomendado</p>
-          <div class="recommended-service__icon" aria-hidden="true">
-            <SearchCheck :size="28" :stroke-width="2.4" />
+      <section class="advice-section">
+        <div class="advice-section__panel glass-panel">
+          <div class="advice-section__icon" aria-hidden="true">
+            <SearchCheck :size="30" :stroke-width="2.4" />
           </div>
-          <h2>No sabes que elegir? Empeza por una web profesional o catalogo con WhatsApp.</h2>
-          <p>
-            Para muchos negocios chicos, un catalogo con WhatsApp funciona mejor que una
-            tienda completa al principio: es simple, cuesta menos y permite validar
-            consultas antes de automatizar pagos o stock.
-          </p>
-          <div class="recommended-service__actions">
+          <div>
+            <p class="section-kicker">Recomendacion</p>
+            <h2>Para empezar, conviene una web profesional o un catalogo con WhatsApp.</h2>
+            <p>
+              En muchos negocios chicos, un catalogo con WhatsApp funciona mejor que una
+              tienda completa al principio: es mas simple, cuesta menos y permite validar
+              demanda antes de sumar pagos, stock o automatizaciones.
+            </p>
+          </div>
+          <div class="advice-section__actions">
             <WhatsAppButton label="Consultar que me conviene" />
-            <a href="#servicios">
-              <span>Comparar servicios</span>
-              <ArrowRight :size="17" :stroke-width="2.7" aria-hidden="true" />
+            <a href="#ejemplos">
+              <span>Ver ejemplos</span>
+              <ArrowRight :size="17" :stroke-width="2.6" aria-hidden="true" />
             </a>
           </div>
         </div>
       </section>
 
-      <section id="ejemplos" class="projects-proof">
-        <p class="section-kicker">Ejemplos</p>
-        <h2 class="section-title">Demos propias que muestran lo que puedo armar</h2>
-        <p class="section-subtitle">
-          No son trabajos para clientes. Son proyectos propios usados como prueba de
-          capacidad: reservas, tiendas, catalogos, paneles y sistemas simples.
-        </p>
+      <section id="ejemplos" class="projects-section">
+        <div class="section-heading">
+          <p class="section-kicker">Ejemplos</p>
+          <h2 class="section-title">Demos propias que prueban capacidad real de desarrollo</h2>
+          <p class="section-subtitle">
+            No son trabajos para clientes. Son desarrollos propios que muestran sistemas
+            de reservas, tiendas, paneles, usuarios y catalogos.
+          </p>
+        </div>
 
-        <div class="projects-proof__grid">
+        <div class="projects-grid">
           <ProjectProofCard
             v-for="project in projectProofs"
             :key="project.title"
@@ -253,11 +242,14 @@ onMounted(() => {
       </section>
 
       <section id="proceso" class="process-section">
-        <p class="section-kicker">Proceso de trabajo</p>
-        <h2 class="section-title">Una forma simple y ordenada de avanzar</h2>
-        <p class="section-subtitle">
-          La idea es que sepas que se entrega, cuanto cuesta y que falta antes de avanzar.
-        </p>
+        <div class="section-heading">
+          <p class="section-kicker">Proceso</p>
+          <h2 class="section-title">Un proceso simple para avanzar sin vueltas</h2>
+          <p class="section-subtitle">
+            Cada etapa tiene un objetivo concreto para evitar improvisaciones, cambios
+            confusos y entregas poco claras.
+          </p>
+        </div>
 
         <div class="process-grid">
           <ProcessStep
@@ -269,13 +261,15 @@ onMounted(() => {
         </div>
       </section>
 
-      <section id="precios" class="maintenance-section">
-        <p class="section-kicker">Mantenimiento mensual</p>
-        <h2 class="section-title">Soporte para que la web siga funcionando y mejore con el tiempo</h2>
-        <p class="section-subtitle">
-          Podes contratar mantenimiento mensual o soporte puntual. Si el proyecto tiene
-          panel, usuarios o datos internos, el soporte se define segun el alcance real.
-        </p>
+      <section id="precios" class="pricing-section">
+        <div class="section-heading">
+          <p class="section-kicker">Mantenimiento</p>
+          <h2 class="section-title">Soporte mensual para mantener la web prolija y funcionando</h2>
+          <p class="section-subtitle">
+            Para cambios de contenido, soporte, mejoras y control tecnico. En sistemas con
+            usuarios o base de datos, el soporte se define segun el alcance.
+          </p>
+        </div>
 
         <div class="pricing-grid">
           <PricingCard v-for="plan in maintenancePlans" :key="plan.title" :plan="plan" />
@@ -284,8 +278,11 @@ onMounted(() => {
 
       <section class="industries-section">
         <div>
-          <p class="section-kicker">Para quien es</p>
-          <h2>Negocios que necesitan verse claros, confiables y faciles de contactar</h2>
+          <p class="section-kicker">
+            <Store :size="15" :stroke-width="2.5" aria-hidden="true" />
+            Para quien es
+          </p>
+          <h2>Negocios que necesitan verse confiables antes del primer mensaje</h2>
         </div>
 
         <div class="industries-list" aria-label="Rubros recomendados">
@@ -296,25 +293,27 @@ onMounted(() => {
       <CTASection />
 
       <section id="faq" class="faq-section">
-        <p class="section-kicker">Preguntas frecuentes</p>
-        <h2 class="section-title">Antes de pedir una propuesta</h2>
+        <div class="section-heading">
+          <p class="section-kicker">Preguntas frecuentes</p>
+          <h2 class="section-title">Antes de pedir una propuesta</h2>
+        </div>
         <div class="faq-grid">
           <FAQItem v-for="item in faqs" :key="item.question" :item="item" />
         </div>
       </section>
 
-      <section class="commercial-contact">
-        <div class="commercial-contact__panel glass-panel">
+      <section class="contact-section">
+        <div class="contact-section__panel glass-panel">
           <div>
-            <p class="section-kicker">Datos de contacto</p>
+            <p class="section-kicker">Contacto</p>
             <h2>Lucas Rey / LR Digital</h2>
             <p>
-              Webs, catalogos digitales, menus, tiendas online simples, sistemas y mantenimiento para
-              negocios que necesitan recibir mas consultas.
+              Webs, catalogos digitales, menus, tiendas online simples, sistemas y
+              mantenimiento para negocios que necesitan recibir mas consultas.
             </p>
           </div>
 
-          <div class="commercial-contact__links">
+          <div class="contact-section__links">
             <WhatsAppButton />
             <a v-if="hasEmail" :href="`mailto:${businessConfig.email}`">
               <CalendarCheck :size="18" :stroke-width="2.5" aria-hidden="true" />
@@ -324,6 +323,8 @@ onMounted(() => {
         </div>
       </section>
     </main>
+
+    <WhatsAppButton class="floating-whatsapp" label="WhatsApp" />
   </div>
 </template>
 
@@ -331,20 +332,6 @@ onMounted(() => {
 .commercial-page {
   position: relative;
   overflow-x: hidden;
-  isolation: isolate;
-}
-
-.animated-surface {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(115deg, transparent 0 18%, rgba(93, 214, 255, 0.08) 30%, transparent 44%),
-    linear-gradient(245deg, transparent 0 20%, rgba(255, 122, 24, 0.1) 34%, transparent 48%);
-  background-size: 180% 180%, 160% 160%;
-  opacity: 0.75;
-  animation: surfaceDrift 18s ease-in-out infinite alternate;
 }
 
 .commercial-nav {
@@ -355,17 +342,13 @@ onMounted(() => {
   width: min(1180px, calc(100% - 48px));
   grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 18px;
+  gap: 24px;
   margin: 16px auto 0;
-  border: 1px solid rgba(168, 180, 200, 0.16);
-  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 8px;
   padding: 12px 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
-    rgba(5, 12, 23, 0.82);
-  box-shadow:
-    0 18px 70px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(7, 12, 20, 0.84);
+  box-shadow: 0 16px 52px rgba(0, 0, 0, 0.26);
   backdrop-filter: blur(18px);
 }
 
@@ -375,451 +358,321 @@ onMounted(() => {
 }
 
 .commercial-logo span {
-  font-family: "Bahnschrift", "Aptos Display", "Segoe UI", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 900;
 }
 
 .commercial-logo small {
-  color: var(--accent-soft);
-  font-size: 0.76rem;
+  color: var(--accent-cold);
+  font-size: 0.72rem;
   font-weight: 850;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .commercial-nav nav {
   display: flex;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 4px;
 }
 
 .commercial-nav nav a {
-  position: relative;
-  border-radius: 999px;
-  padding: 10px 12px;
+  border-radius: 6px;
+  padding: 10px 11px;
   color: var(--muted);
-  font-size: 0.92rem;
-  font-weight: 780;
+  font-size: 0.9rem;
+  font-weight: 760;
   transition:
-    color 0.2s ease,
-    background 0.2s ease,
-    transform 0.2s ease;
+    color 0.18s ease,
+    background 0.18s ease;
 }
 
 .commercial-nav nav a:hover {
-  transform: translateY(-1px);
   color: var(--text);
   background: rgba(255, 255, 255, 0.06);
 }
 
-.services-hero {
+.hero-section {
   display: grid;
   min-height: calc(100vh - 104px);
-  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   align-items: center;
-  gap: clamp(32px, 5vw, 64px);
-  padding-top: 52px;
+  gap: clamp(36px, 6vw, 78px);
+  padding-top: 48px;
 }
 
-.services-hero h1 {
-  max-width: 880px;
+.hero-content {
+  max-width: 760px;
+}
+
+.hero-content h1 {
+  max-width: 820px;
   margin-bottom: 22px;
-  font-size: clamp(2.35rem, 4vw, 4.45rem);
-  line-height: 1.02;
+  font-size: clamp(2.7rem, 5vw, 5.25rem);
+  line-height: 0.95;
 }
 
-.services-hero__intro {
-  max-width: 720px;
+.hero-lead {
+  max-width: 690px;
   color: var(--muted);
-  font-size: 1.08rem;
-  line-height: 1.9;
+  font-size: clamp(1.02rem, 1vw, 1.16rem);
+  line-height: 1.82;
 }
 
-.services-hero__actions,
-.recommended-service__actions {
+.hero-actions,
+.advice-section__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
   margin-top: 28px;
 }
 
 .action {
-  position: relative;
-  overflow: hidden;
   display: inline-flex;
   min-height: 48px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 14px;
-  padding: 14px 18px;
+  border-radius: 6px;
+  padding: 13px 16px;
   font-weight: 850;
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
 
 .action:hover,
-.recommended-service__actions a:hover,
-.commercial-contact__links a:hover {
-  transform: translateY(-3px);
+.advice-section__actions a:hover,
+.contact-section__links a:hover {
+  transform: translateY(-2px);
 }
 
-.action--secondary {
-  color: #07111f;
-  background: linear-gradient(135deg, #5dd6ff, #9be7ff);
-  box-shadow:
-    0 18px 42px rgba(93, 214, 255, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.62);
-}
-
-.action--secondary svg {
-  transition: transform 0.2s ease;
-}
-
-.action--secondary:hover svg {
-  transform: translateX(3px);
-}
-
-.action--ghost,
-.recommended-service__actions a {
-  border: 1px solid rgba(168, 180, 200, 0.24);
+.action--secondary,
+.advice-section__actions a {
+  border: 1px solid rgba(148, 163, 184, 0.22);
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.045);
 }
 
-.services-hero__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-  padding: 0;
-  list-style: none;
-}
-
-.services-hero__badges li {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid rgba(168, 180, 200, 0.16);
-  border-radius: 999px;
-  padding: 9px 12px;
-  color: #d8e1ef;
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 0.9rem;
-  font-weight: 760;
-}
-
-.services-hero__badges svg {
-  color: var(--accent-cold);
-}
-
-.hero-metrics {
+.trust-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  max-width: 620px;
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
-.hero-metrics article {
-  border: 1px solid rgba(168, 180, 200, 0.14);
-  border-radius: 18px;
-  padding: 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent),
-    rgba(255, 255, 255, 0.035);
+.trust-strip span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  padding: 12px;
+  color: #d8e1ef;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.86rem;
+  font-weight: 760;
 }
 
-.hero-metrics strong,
-.hero-metrics span {
-  display: block;
+.trust-strip svg {
+  flex: 0 0 auto;
+  color: var(--accent-cold);
 }
 
-.hero-metrics strong {
-  color: #ffffff;
-  font-size: 1.08rem;
-  line-height: 1.15;
-}
-
-.hero-metrics span {
-  margin-top: 5px;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.35;
-}
-
-.services-hero__visual {
-  display: grid;
-  gap: 16px;
-}
-
-.mockup-card {
+.proposal-panel {
   position: relative;
   overflow: hidden;
-  border-radius: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 8px;
+  padding: clamp(22px, 3.5vw, 34px);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.09), transparent 34%),
-    var(--panel);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 38%),
+    rgba(9, 16, 28, 0.9);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
 }
 
-.mockup-card::before {
+.proposal-panel::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 34px 34px;
-  opacity: 0.18;
+  background:
+    linear-gradient(90deg, rgba(93, 214, 255, 0.16), transparent 34%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 20px);
+  opacity: 0.5;
 }
 
-.mockup-card__bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid rgba(168, 180, 200, 0.14);
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.mockup-card__bar span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(168, 180, 200, 0.42);
-}
-
-.mockup-card__bar p {
-  margin-left: auto;
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 800;
-}
-
-.mockup-card__screen {
+.proposal-panel > * {
   position: relative;
   z-index: 1;
-  display: grid;
-  gap: 18px;
-  padding: clamp(20px, 4vw, 34px);
 }
 
-.mockup-card__status {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid rgba(37, 211, 102, 0.22);
-  border-radius: 999px;
-  padding: 8px 11px;
-  color: #dfffea;
-  background: rgba(37, 211, 102, 0.08);
-  font-size: 0.82rem;
-  font-weight: 820;
-}
-
-.live-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #25d366;
-  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
-  animation: livePulse 1.8s ease-out infinite;
-}
-
-.mockup-card__headline {
-  display: grid;
-  gap: 9px;
-}
-
-.mockup-card__headline span {
-  color: var(--accent-cold);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.mockup-card__headline strong {
-  max-width: 12ch;
-  font-size: clamp(1.9rem, 4vw, 3.1rem);
-  line-height: 1.04;
-}
-
-.mockup-card__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.mockup-card__grid article {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(168, 180, 200, 0.14);
-  border-radius: 16px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.045);
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-.mockup-card__grid article:hover {
-  transform: translateY(-3px);
-  border-color: rgba(93, 214, 255, 0.28);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.mockup-card__grid svg {
-  margin-bottom: 10px;
-  color: var(--accent-cold);
-}
-
-.mockup-card__grid small {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--accent-soft);
-  font-weight: 850;
-}
-
-.mockup-card__grid b {
-  color: #edf4fb;
-  line-height: 1.35;
-}
-
-.mockup-card__footer {
+.proposal-panel__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 14px;
-  border-top: 1px solid rgba(168, 180, 200, 0.12);
-  padding-top: 16px;
+  gap: 16px;
+  margin-bottom: 28px;
 }
 
-.mockup-card__footer small,
-.mockup-card__footer b {
+.proposal-panel__header span,
+.proposal-panel__score small {
   display: block;
-}
-
-.mockup-card__footer small {
-  margin-bottom: 4px;
-  color: var(--muted);
-  font-weight: 780;
-}
-
-.mockup-card__cta {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 8px;
-  border-radius: 14px;
-  padding: 13px 16px;
-  color: #06101c;
-  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-  font-weight: 900;
-  white-space: nowrap;
-  box-shadow: 0 18px 42px rgba(255, 122, 24, 0.2);
-}
-
-.quick-proof {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px;
-  border-radius: 20px;
-  padding: 20px;
-  background:
-    linear-gradient(135deg, rgba(93, 214, 255, 0.1), transparent 42%),
-    var(--panel);
-}
-
-.quick-proof svg {
+  margin-bottom: 6px;
   color: var(--accent-cold);
-}
-
-.quick-proof span {
-  color: var(--accent-cold);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.quick-proof strong {
-  font-size: 1.12rem;
-  line-height: 1.45;
+.proposal-panel__header strong {
+  font-size: 1.28rem;
 }
 
-.business-context,
+.proposal-panel__header p {
+  border: 1px solid rgba(93, 214, 255, 0.28);
+  border-radius: 999px;
+  padding: 8px 10px;
+  color: #dff8ff;
+  background: rgba(93, 214, 255, 0.08);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.proposal-panel__score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.proposal-panel__score strong {
+  font-size: 1.52rem;
+  line-height: 1.08;
+}
+
+.proposal-panel__score svg {
+  color: var(--accent-soft);
+}
+
+.proposal-panel__services {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.proposal-panel__services article {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.13);
+  padding: 14px 0;
+}
+
+.proposal-panel__services span {
+  color: #d8e1ef;
+  line-height: 1.35;
+}
+
+.proposal-panel__services strong {
+  color: var(--accent-soft);
+  white-space: nowrap;
+}
+
+.proposal-panel__timeline {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.proposal-panel__timeline div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.proposal-panel__timeline svg {
+  color: var(--accent-cold);
+}
+
+.context-section,
 .industries-section {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;
-  gap: 42px;
+  gap: 44px;
   align-items: start;
 }
 
-.business-context h2,
+.context-section h2,
 .industries-section h2 {
   font-size: clamp(2rem, 3.4vw, 4rem);
-  line-height: 1.06;
+  line-height: 1.02;
 }
 
-.business-context__content {
+.context-section__content {
   display: grid;
   gap: 24px;
 }
 
-.business-context__content > p {
+.context-section__content > p {
   color: var(--muted);
-  font-size: 1.08rem;
-  line-height: 1.85;
+  font-size: 1.07rem;
+  line-height: 1.82;
 }
 
-.business-context ul {
+.context-section ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
   padding: 0;
   list-style: none;
 }
 
-.business-context li {
+.context-section li {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  border: 1px solid rgba(168, 180, 200, 0.14);
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 8px;
+  padding: 15px;
   color: #d8e1ef;
-  background: rgba(255, 255, 255, 0.045);
-  line-height: 1.55;
+  background: rgba(255, 255, 255, 0.035);
+  line-height: 1.5;
 }
 
-.business-context li svg {
+.context-section li svg {
   flex: 0 0 auto;
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--accent-cold);
 }
 
+.section-heading {
+  max-width: 860px;
+}
+
 .services-grid,
-.projects-proof__grid,
+.projects-grid,
 .process-grid,
 .pricing-grid,
 .faq-grid {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .services-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.projects-proof__grid {
+.projects-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -835,164 +688,124 @@ onMounted(() => {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.recommended-service__panel {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-  padding: clamp(26px, 5vw, 54px);
-  background:
-    linear-gradient(135deg, rgba(255, 122, 24, 0.13), transparent 36%),
-    linear-gradient(315deg, rgba(93, 214, 255, 0.1), transparent 42%),
-    var(--panel);
+.advice-section__panel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 22px;
+  align-items: center;
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 38px);
 }
 
-.recommended-service__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    110deg,
-    rgba(255, 255, 255, 0.04) 0 1px,
-    transparent 1px 18px
-  );
-  opacity: 0.24;
-}
-
-.recommended-service__panel > * {
-  position: relative;
-  z-index: 1;
-}
-
-.recommended-service__icon {
+.advice-section__icon {
   display: inline-grid;
   width: 58px;
   height: 58px;
   place-items: center;
-  margin-bottom: 18px;
-  border-radius: 18px;
+  border-radius: 8px;
   color: var(--accent-cold);
-  background: rgba(93, 214, 255, 0.1);
+  background: rgba(93, 214, 255, 0.09);
 }
 
-.recommended-service h2 {
-  max-width: 920px;
-  margin-bottom: 16px;
-  font-size: clamp(2rem, 3.6vw, 4.1rem);
-  line-height: 1.05;
+.advice-section h2 {
+  max-width: 860px;
+  margin-bottom: 10px;
+  font-size: clamp(1.9rem, 3vw, 3.3rem);
+  line-height: 1.04;
 }
 
-.recommended-service p {
-  max-width: 820px;
+.advice-section p:not(.section-kicker) {
+  max-width: 760px;
   color: var(--muted);
-  font-size: 1.08rem;
-  line-height: 1.85;
+  line-height: 1.72;
 }
 
-.recommended-service__actions a {
+.advice-section__actions {
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.advice-section__actions a {
   display: inline-flex;
   min-height: 48px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 14px;
-  padding: 14px 18px;
+  border-radius: 6px;
+  padding: 13px 16px;
   font-weight: 850;
-}
-
-.recommended-service__actions a svg {
-  transition: transform 0.2s ease;
-}
-
-.recommended-service__actions a:hover svg {
-  transform: translateX(3px);
 }
 
 .industries-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 9px;
 }
 
 .industries-list span {
-  border: 1px solid rgba(168, 180, 200, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 999px;
-  padding: 10px 13px;
+  padding: 9px 12px;
   color: #dce7f5;
-  background: rgba(255, 255, 255, 0.05);
-  font-weight: 780;
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 760;
 }
 
-.commercial-contact {
+.contact-section {
   padding-top: 48px;
 }
 
-.commercial-contact__panel {
+.contact-section__panel {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 28px;
   align-items: center;
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 28px;
 }
 
-.commercial-contact h2 {
+.contact-section h2 {
   margin-bottom: 10px;
   font-size: clamp(1.8rem, 3vw, 3rem);
 }
 
-.commercial-contact p {
+.contact-section p {
   max-width: 620px;
   color: var(--muted);
   line-height: 1.75;
 }
 
-.commercial-contact__links {
+.contact-section__links {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px;
 }
 
-.commercial-contact__links a:not(.whatsapp-button) {
+.contact-section__links a:not(.whatsapp-button) {
   display: inline-flex;
   min-height: 46px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(168, 180, 200, 0.2);
-  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 6px;
   padding: 12px 15px;
   color: var(--text);
   font-weight: 820;
   background: rgba(255, 255, 255, 0.04);
   transition:
-    transform 0.2s ease,
-    background 0.2s ease;
+    transform 0.18s ease,
+    background 0.18s ease;
 }
 
-@keyframes surfaceDrift {
-  0% {
-    background-position: 0% 20%, 100% 10%;
-  }
-
-  100% {
-    background-position: 100% 80%, 0% 90%;
-  }
-}
-
-@keyframes livePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.52);
-  }
-
-  70% {
-    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
+.floating-whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 50;
+  min-height: 46px;
+  box-shadow: 0 20px 44px rgba(37, 211, 102, 0.24);
 }
 
 @media (max-width: 1080px) {
@@ -1001,14 +814,15 @@ onMounted(() => {
   }
 
   .commercial-nav nav {
-    order: 3;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 
-  .services-hero,
-  .business-context,
+  .hero-section,
+  .context-section,
   .industries-section,
-  .commercial-contact__panel {
+  .contact-section__panel,
+  .advice-section__panel {
     grid-template-columns: 1fr;
   }
 
@@ -1018,7 +832,8 @@ onMounted(() => {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .commercial-contact__links {
+  .advice-section__actions,
+  .contact-section__links {
     justify-content: flex-start;
   }
 }
@@ -1027,112 +842,88 @@ onMounted(() => {
   .commercial-nav {
     top: 10px;
     width: min(100% - 20px, 1180px);
-    grid-template-columns: 1fr;
     gap: 12px;
   }
 
   .commercial-nav nav {
-    display: flex;
-    order: 2;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
-    overflow: visible;
-    padding-bottom: 0;
   }
 
   .commercial-nav nav a {
-    flex: 1 1 calc(33.333% - 6px);
-    padding: 9px 8px;
+    padding: 9px 6px;
     text-align: center;
-    font-size: 0.84rem;
+    font-size: 0.8rem;
   }
 
-  .services-hero {
+  .hero-section {
     min-height: auto;
-    padding-top: 28px;
+    padding-top: 42px;
   }
 
-  .services-hero h1 {
-    max-width: 12ch;
-    font-size: clamp(2.25rem, 10.5vw, 3.25rem);
-    line-height: 1;
+  .hero-content h1 {
+    font-size: clamp(2.3rem, 10.5vw, 3.2rem);
+    line-height: 0.98;
   }
 
-  .services-hero__intro {
-    max-width: 31ch;
+  .hero-lead {
     font-size: 1rem;
-    line-height: 1.75;
+    line-height: 1.72;
   }
 
-  .services-hero__badges {
-    margin-top: 18px;
-  }
-
-  .hero-metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    max-width: 100%;
-    gap: 8px;
-  }
-
-  .hero-metrics article {
-    padding: 11px 8px;
-  }
-
-  .hero-metrics strong {
-    font-size: 0.92rem;
-  }
-
-  .hero-metrics span {
-    font-size: 0.72rem;
-  }
-
-  .mockup-card__footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .mockup-card__cta {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .services-grid,
-  .projects-proof__grid,
-  .process-grid,
-  .pricing-grid,
-  .faq-grid,
-  .business-context ul {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-@media (max-width: 560px) {
-  .services-hero__actions,
-  .recommended-service__actions {
+  .hero-actions,
+  .advice-section__actions {
     display: grid;
   }
 
   .action,
-  .recommended-service__actions a {
+  .advice-section__actions a {
     width: 100%;
     min-height: 54px;
   }
 
-  .services-hero__badges {
-    display: grid;
+  .trust-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
-  .mockup-card__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .trust-strip span {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 0.73rem;
+    line-height: 1.25;
   }
 
-  .quick-proof {
+  .proposal-panel__score {
+    align-items: flex-start;
+  }
+
+  .context-section ul,
+  .services-grid,
+  .projects-grid,
+  .process-grid,
+  .pricing-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
   }
 
-  .commercial-contact__links {
+  .floating-whatsapp {
+    right: 14px;
+    bottom: 14px;
+    width: auto;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .proposal-panel__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contact-section__links {
     display: grid;
   }
 }
