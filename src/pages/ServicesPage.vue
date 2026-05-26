@@ -1,10 +1,25 @@
 <script setup>
 import { computed, onMounted } from "vue";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarCheck,
+  CheckCircle2,
+  MapPin,
+  MessageCircle,
+  MousePointerClick,
+  SearchCheck,
+  Share2,
+  ShoppingBag,
+  Sparkles,
+  Store
+} from "@lucide/vue";
 import { businessConfig } from "../config/business";
 import {
   businessBenefits,
   faqs,
   heroBadges,
+  heroMetrics,
   industries,
   maintenancePlans,
   processSteps,
@@ -45,6 +60,8 @@ onMounted(() => {
 
 <template>
   <div class="commercial-page">
+    <div class="animated-surface" aria-hidden="true"></div>
+
     <header class="commercial-nav" aria-label="Navegacion principal">
       <a class="commercial-logo" href="/" aria-label="Ir al inicio">
         <span>{{ businessConfig.brandName }}</span>
@@ -64,7 +81,10 @@ onMounted(() => {
     <main>
       <section id="inicio" class="services-hero">
         <div class="services-hero__copy">
-          <p class="section-kicker">Webs para negocios</p>
+          <p class="section-kicker">
+            <Sparkles :size="15" :stroke-width="2.6" aria-hidden="true" />
+            Webs para negocios
+          </p>
           <h1>Tu negocio mas profesional y listo para recibir consultas</h1>
           <p class="services-hero__intro">
             Creo webs, catalogos y menus digitales para que tus clientes vean que
@@ -73,12 +93,25 @@ onMounted(() => {
 
           <div class="services-hero__actions">
             <WhatsAppButton />
-            <a href="#servicios" class="action action--secondary">Ver precios</a>
+            <a href="#servicios" class="action action--secondary">
+              <span>Ver precios</span>
+              <ArrowRight :size="18" :stroke-width="2.7" aria-hidden="true" />
+            </a>
           </div>
 
           <ul class="services-hero__badges" aria-label="Beneficios principales">
-            <li v-for="badge in heroBadges" :key="badge">{{ badge }}</li>
+            <li v-for="badge in heroBadges" :key="badge">
+              <BadgeCheck :size="15" :stroke-width="2.7" aria-hidden="true" />
+              <span>{{ badge }}</span>
+            </li>
           </ul>
+
+          <div class="hero-metrics" aria-label="Datos destacados del servicio">
+            <article v-for="metric in heroMetrics" :key="metric.label">
+              <strong>{{ metric.value }}</strong>
+              <span>{{ metric.label }}</span>
+            </article>
+          </div>
         </div>
 
         <div class="services-hero__visual" aria-label="Ejemplo visual de web comercial">
@@ -91,6 +124,11 @@ onMounted(() => {
             </div>
 
             <div class="mockup-card__screen">
+              <div class="mockup-card__status">
+                <span class="live-dot" aria-hidden="true"></span>
+                Web lista para recibir consultas
+              </div>
+
               <div class="mockup-card__headline">
                 <span>Negocio local</span>
                 <strong>Servicios, precios y contacto claro</strong>
@@ -98,30 +136,46 @@ onMounted(() => {
 
               <div class="mockup-card__grid">
                 <article>
+                  <MessageCircle :size="20" :stroke-width="2.5" aria-hidden="true" />
                   <small>WhatsApp</small>
                   <b>Consulta directa</b>
                 </article>
                 <article>
+                  <MapPin :size="20" :stroke-width="2.5" aria-hidden="true" />
                   <small>Google Maps</small>
                   <b>Ubicacion visible</b>
                 </article>
                 <article>
+                  <ShoppingBag :size="20" :stroke-width="2.5" aria-hidden="true" />
                   <small>Catalogo</small>
                   <b>Productos ordenados</b>
                 </article>
                 <article>
+                  <Share2 :size="20" :stroke-width="2.5" aria-hidden="true" />
                   <small>Redes</small>
                   <b>Instagram y links</b>
                 </article>
               </div>
 
-              <div class="mockup-card__cta">Pedir propuesta</div>
+              <div class="mockup-card__footer">
+                <div>
+                  <small>Proxima accion</small>
+                  <b>Cliente toca y escribe</b>
+                </div>
+                <div class="mockup-card__cta">
+                  Pedir propuesta
+                  <MousePointerClick :size="17" :stroke-width="2.6" aria-hidden="true" />
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="quick-proof glass-panel">
-            <span>LR Digital</span>
-            <strong>Propuesta clara, precio definido y entrega ordenada.</strong>
+            <Store :size="24" :stroke-width="2.4" aria-hidden="true" />
+            <div>
+              <span>LR Digital</span>
+              <strong>Propuesta clara, precio definido y entrega ordenada.</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -138,7 +192,10 @@ onMounted(() => {
             perder clientes.
           </p>
           <ul>
-            <li v-for="benefit in businessBenefits" :key="benefit">{{ benefit }}</li>
+            <li v-for="benefit in businessBenefits" :key="benefit">
+              <CheckCircle2 :size="18" :stroke-width="2.6" aria-hidden="true" />
+              <span>{{ benefit }}</span>
+            </li>
           </ul>
         </div>
       </section>
@@ -159,6 +216,9 @@ onMounted(() => {
       <section class="recommended-service">
         <div class="recommended-service__panel glass-panel">
           <p class="section-kicker">Servicio recomendado</p>
+          <div class="recommended-service__icon" aria-hidden="true">
+            <SearchCheck :size="28" :stroke-width="2.4" />
+          </div>
           <h2>No sabes que elegir? Empeza por una web profesional o catalogo con WhatsApp.</h2>
           <p>
             Para muchos negocios chicos, un catalogo con WhatsApp funciona mejor que una
@@ -167,7 +227,10 @@ onMounted(() => {
           </p>
           <div class="recommended-service__actions">
             <WhatsAppButton label="Consultar que me conviene" />
-            <a href="#servicios">Comparar servicios</a>
+            <a href="#servicios">
+              <span>Comparar servicios</span>
+              <ArrowRight :size="17" :stroke-width="2.7" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </section>
@@ -253,7 +316,10 @@ onMounted(() => {
 
           <div class="commercial-contact__links">
             <WhatsAppButton />
-            <a v-if="hasEmail" :href="`mailto:${businessConfig.email}`">Email</a>
+            <a v-if="hasEmail" :href="`mailto:${businessConfig.email}`">
+              <CalendarCheck :size="18" :stroke-width="2.5" aria-hidden="true" />
+              <span>Email</span>
+            </a>
           </div>
         </div>
       </section>
@@ -265,6 +331,20 @@ onMounted(() => {
 .commercial-page {
   position: relative;
   overflow-x: hidden;
+  isolation: isolate;
+}
+
+.animated-surface {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0 18%, rgba(93, 214, 255, 0.08) 30%, transparent 44%),
+    linear-gradient(245deg, transparent 0 20%, rgba(255, 122, 24, 0.1) 34%, transparent 48%);
+  background-size: 180% 180%, 160% 160%;
+  opacity: 0.75;
+  animation: surfaceDrift 18s ease-in-out infinite alternate;
 }
 
 .commercial-nav {
@@ -280,7 +360,12 @@ onMounted(() => {
   border: 1px solid rgba(168, 180, 200, 0.16);
   border-radius: 20px;
   padding: 12px 14px;
-  background: rgba(5, 12, 23, 0.78);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
+    rgba(5, 12, 23, 0.82);
+  box-shadow:
+    0 18px 70px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
 }
 
@@ -310,14 +395,20 @@ onMounted(() => {
 }
 
 .commercial-nav nav a {
+  position: relative;
   border-radius: 999px;
   padding: 10px 12px;
   color: var(--muted);
   font-size: 0.92rem;
   font-weight: 780;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .commercial-nav nav a:hover {
+  transform: translateY(-1px);
   color: var(--text);
   background: rgba(255, 255, 255, 0.06);
 }
@@ -354,10 +445,13 @@ onMounted(() => {
 }
 
 .action {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   min-height: 48px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border-radius: 14px;
   padding: 14px 18px;
   font-weight: 850;
@@ -376,6 +470,17 @@ onMounted(() => {
 .action--secondary {
   color: #07111f;
   background: linear-gradient(135deg, #5dd6ff, #9be7ff);
+  box-shadow:
+    0 18px 42px rgba(93, 214, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.action--secondary svg {
+  transition: transform 0.2s ease;
+}
+
+.action--secondary:hover svg {
+  transform: translateX(3px);
 }
 
 .action--ghost,
@@ -395,6 +500,9 @@ onMounted(() => {
 }
 
 .services-hero__badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   border: 1px solid rgba(168, 180, 200, 0.16);
   border-radius: 999px;
   padding: 9px 12px;
@@ -404,14 +512,69 @@ onMounted(() => {
   font-weight: 760;
 }
 
+.services-hero__badges svg {
+  color: var(--accent-cold);
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 620px;
+  margin-top: 20px;
+}
+
+.hero-metrics article {
+  border: 1px solid rgba(168, 180, 200, 0.14);
+  border-radius: 18px;
+  padding: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent),
+    rgba(255, 255, 255, 0.035);
+}
+
+.hero-metrics strong,
+.hero-metrics span {
+  display: block;
+}
+
+.hero-metrics strong {
+  color: #ffffff;
+  font-size: 1.08rem;
+  line-height: 1.15;
+}
+
+.hero-metrics span {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
 .services-hero__visual {
   display: grid;
   gap: 16px;
 }
 
 .mockup-card {
+  position: relative;
   overflow: hidden;
   border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), transparent 34%),
+    var(--panel);
+}
+
+.mockup-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.18;
 }
 
 .mockup-card__bar {
@@ -438,9 +601,34 @@ onMounted(() => {
 }
 
 .mockup-card__screen {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 18px;
   padding: clamp(20px, 4vw, 34px);
+}
+
+.mockup-card__status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(37, 211, 102, 0.22);
+  border-radius: 999px;
+  padding: 8px 11px;
+  color: #dfffea;
+  background: rgba(37, 211, 102, 0.08);
+  font-size: 0.82rem;
+  font-weight: 820;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  animation: livePulse 1.8s ease-out infinite;
 }
 
 .mockup-card__headline {
@@ -469,10 +657,27 @@ onMounted(() => {
 }
 
 .mockup-card__grid article {
+  position: relative;
+  overflow: hidden;
   border: 1px solid rgba(168, 180, 200, 0.14);
   border-radius: 16px;
   padding: 14px;
   background: rgba(255, 255, 255, 0.045);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.mockup-card__grid article:hover {
+  transform: translateY(-3px);
+  border-color: rgba(93, 214, 255, 0.28);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.mockup-card__grid svg {
+  margin-bottom: 10px;
+  color: var(--accent-cold);
 }
 
 .mockup-card__grid small {
@@ -487,20 +692,54 @@ onMounted(() => {
   line-height: 1.35;
 }
 
+.mockup-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid rgba(168, 180, 200, 0.12);
+  padding-top: 16px;
+}
+
+.mockup-card__footer small,
+.mockup-card__footer b {
+  display: block;
+}
+
+.mockup-card__footer small {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-weight: 780;
+}
+
 .mockup-card__cta {
+  display: inline-flex;
   width: fit-content;
+  align-items: center;
+  gap: 8px;
   border-radius: 14px;
   padding: 13px 16px;
   color: #06101c;
   background: linear-gradient(135deg, var(--accent), var(--accent-soft));
   font-weight: 900;
+  white-space: nowrap;
+  box-shadow: 0 18px 42px rgba(255, 122, 24, 0.2);
 }
 
 .quick-proof {
   display: grid;
-  gap: 8px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
   border-radius: 20px;
   padding: 20px;
+  background:
+    linear-gradient(135deg, rgba(93, 214, 255, 0.1), transparent 42%),
+    var(--panel);
+}
+
+.quick-proof svg {
+  color: var(--accent-cold);
 }
 
 .quick-proof span {
@@ -550,12 +789,21 @@ onMounted(() => {
 }
 
 .business-context li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   border: 1px solid rgba(168, 180, 200, 0.14);
   border-radius: 16px;
   padding: 16px;
   color: #d8e1ef;
   background: rgba(255, 255, 255, 0.045);
   line-height: 1.55;
+}
+
+.business-context li svg {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--accent-cold);
 }
 
 .services-grid,
@@ -588,8 +836,43 @@ onMounted(() => {
 }
 
 .recommended-service__panel {
+  position: relative;
+  overflow: hidden;
   border-radius: 28px;
   padding: clamp(26px, 5vw, 54px);
+  background:
+    linear-gradient(135deg, rgba(255, 122, 24, 0.13), transparent 36%),
+    linear-gradient(315deg, rgba(93, 214, 255, 0.1), transparent 42%),
+    var(--panel);
+}
+
+.recommended-service__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.04) 0 1px,
+    transparent 1px 18px
+  );
+  opacity: 0.24;
+}
+
+.recommended-service__panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.recommended-service__icon {
+  display: inline-grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  color: var(--accent-cold);
+  background: rgba(93, 214, 255, 0.1);
 }
 
 .recommended-service h2 {
@@ -611,9 +894,18 @@ onMounted(() => {
   min-height: 48px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border-radius: 14px;
   padding: 14px 18px;
   font-weight: 850;
+}
+
+.recommended-service__actions a svg {
+  transition: transform 0.2s ease;
+}
+
+.recommended-service__actions a:hover svg {
+  transform: translateX(3px);
 }
 
 .industries-list {
@@ -667,6 +959,7 @@ onMounted(() => {
   min-height: 46px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border: 1px solid rgba(168, 180, 200, 0.2);
   border-radius: 14px;
   padding: 12px 15px;
@@ -676,6 +969,30 @@ onMounted(() => {
   transition:
     transform 0.2s ease,
     background 0.2s ease;
+}
+
+@keyframes surfaceDrift {
+  0% {
+    background-position: 0% 20%, 100% 10%;
+  }
+
+  100% {
+    background-position: 100% 80%, 0% 90%;
+  }
+}
+
+@keyframes livePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.52);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
 
 @media (max-width: 1080px) {
@@ -737,9 +1054,9 @@ onMounted(() => {
   }
 
   .services-hero h1 {
-    max-width: 10ch;
-    font-size: clamp(2.55rem, 12vw, 4rem);
-    line-height: 0.98;
+    max-width: 12ch;
+    font-size: clamp(2.25rem, 10.5vw, 3.25rem);
+    line-height: 1;
   }
 
   .services-hero__intro {
@@ -750,6 +1067,34 @@ onMounted(() => {
 
   .services-hero__badges {
     margin-top: 18px;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  .hero-metrics article {
+    padding: 11px 8px;
+  }
+
+  .hero-metrics strong {
+    font-size: 0.92rem;
+  }
+
+  .hero-metrics span {
+    font-size: 0.72rem;
+  }
+
+  .mockup-card__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mockup-card__cta {
+    justify-content: center;
+    width: 100%;
   }
 
   .services-grid,
@@ -780,6 +1125,10 @@ onMounted(() => {
   }
 
   .mockup-card__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quick-proof {
     grid-template-columns: 1fr;
   }
 

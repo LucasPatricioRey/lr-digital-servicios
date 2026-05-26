@@ -2,7 +2,7 @@
   color-scheme: dark;
   --bg: #07111f;
   --bg-soft: #0d1b2f;
-  --panel: rgba(10, 18, 32, 0.82);
+  --panel: rgba(10, 18, 32, 0.86);
   --panel-strong: #12233d;
   --line: rgba(148, 163, 184, 0.2);
   --text: #f8fafc;
@@ -28,8 +28,9 @@ body {
   font-family: "Aptos", "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(93, 214, 255, 0.12), transparent 30%),
-    radial-gradient(circle at top right, rgba(255, 122, 24, 0.16), transparent 28%),
+    linear-gradient(120deg, rgba(93, 214, 255, 0.08), transparent 34%),
+    linear-gradient(240deg, rgba(255, 122, 24, 0.12), transparent 36%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 18px),
     linear-gradient(180deg, #040814 0%, #07111f 45%, #091624 100%);
 }
 
@@ -42,22 +43,20 @@ body::before {
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
-  mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+  mask-image: linear-gradient(180deg, black 0 58%, transparent 100%);
   opacity: 0.3;
 }
 
 body::after {
   content: "";
   position: fixed;
-  inset: -15%;
+  inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 18% 22%, rgba(93, 214, 255, 0.1), transparent 24%),
-    radial-gradient(circle at 82% 14%, rgba(255, 122, 24, 0.12), transparent 22%),
-    radial-gradient(circle at 50% 85%, rgba(255, 184, 108, 0.08), transparent 24%);
-  filter: blur(18px);
-  opacity: 0.7;
-  animation: auroraDrift 18s ease-in-out infinite alternate;
+  background: linear-gradient(100deg, transparent 0 20%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+  background-size: 220% 100%;
+  mix-blend-mode: screen;
+  opacity: 0.34;
+  animation: lightSweep 16s ease-in-out infinite alternate;
 }
 
 body,
@@ -141,7 +140,9 @@ button {
 }
 
 .glass-panel {
-  background: var(--panel);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 42%),
+    var(--panel);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
@@ -205,17 +206,13 @@ button {
   }
 }
 
-@keyframes auroraDrift {
+@keyframes lightSweep {
   0% {
-    transform: translate3d(-2%, -1%, 0) scale(1);
-  }
-
-  50% {
-    transform: translate3d(2%, 1%, 0) scale(1.04);
+    background-position: 0% 0;
   }
 
   100% {
-    transform: translate3d(-1%, 2%, 0) scale(1.02);
+    background-position: 100% 0;
   }
 }
 
