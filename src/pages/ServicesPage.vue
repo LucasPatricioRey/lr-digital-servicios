@@ -80,8 +80,6 @@ onMounted(() => {
     <main>
       <section id="inicio" class="hero-section">
         <div class="hero-content">
-          <img class="hero-brand" src="/logo-lr-digital-crop.png" alt="LR Digital" />
-
           <p class="section-kicker">
             <Sparkles :size="15" :stroke-width="2.5" aria-hidden="true" />
             Servicios digitales para negocios
@@ -105,15 +103,15 @@ onMounted(() => {
           <div class="trust-strip" aria-label="Beneficios principales">
             <span>
               <ShieldCheck :size="17" :stroke-width="2.5" aria-hidden="true" />
-              Propuesta sin compromiso
+              Propuesta clara
             </span>
             <span>
               <Clock3 :size="17" :stroke-width="2.5" aria-hidden="true" />
-              Entrega ordenada
+              Entrega rapida
             </span>
             <span>
               <MessageCircle :size="17" :stroke-width="2.5" aria-hidden="true" />
-              WhatsApp, mapa y redes
+              WhatsApp directo
             </span>
           </div>
         </div>
@@ -335,22 +333,35 @@ onMounted(() => {
   overflow-x: hidden;
 }
 
+.commercial-page main > section {
+  scroll-margin-top: 118px;
+}
+
 .commercial-nav {
-  position: sticky;
+  position: fixed;
   top: 14px;
-  z-index: 40;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
   display: grid;
   width: min(1180px, calc(100% - 48px));
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 24px;
-  margin: 16px auto 0;
+  margin: 0 auto;
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 8px;
   padding: 12px 14px;
-  background: rgba(7, 12, 20, 0.84);
-  box-shadow: 0 16px 52px rgba(0, 0, 0, 0.26);
+  background:
+    linear-gradient(90deg, rgba(26, 183, 255, 0.08), transparent 24%, rgba(255, 255, 255, 0.05)),
+    rgba(7, 12, 20, 0.9);
+  box-shadow:
+    0 16px 52px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(36, 194, 255, 0.04);
   backdrop-filter: blur(18px);
+  animation:
+    navDrop 0.72s cubic-bezier(0.22, 1, 0.36, 1) both,
+    navGlow 4.8s ease-in-out 0.8s infinite;
 }
 
 .commercial-logo {
@@ -362,6 +373,7 @@ onMounted(() => {
   width: 126px;
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(36, 194, 255, 0.2));
 }
 
 .commercial-nav nav {
@@ -392,18 +404,11 @@ onMounted(() => {
   grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   align-items: center;
   gap: clamp(36px, 6vw, 78px);
-  padding-top: 48px;
+  padding-top: 142px;
 }
 
 .hero-content {
   max-width: 760px;
-}
-
-.hero-brand {
-  width: min(360px, 72vw);
-  height: auto;
-  margin-bottom: 28px;
-  filter: drop-shadow(0 0 22px rgba(36, 194, 255, 0.2));
 }
 
 .hero-content h1 {
@@ -809,6 +814,35 @@ onMounted(() => {
   box-shadow: 0 20px 44px rgba(37, 211, 102, 0.24);
 }
 
+@keyframes navDrop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes navGlow {
+  0%,
+  100% {
+    border-color: rgba(148, 163, 184, 0.18);
+    box-shadow:
+      0 16px 52px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(36, 194, 255, 0.04);
+  }
+
+  50% {
+    border-color: rgba(93, 214, 255, 0.34);
+    box-shadow:
+      0 18px 58px rgba(0, 0, 0, 0.36),
+      0 0 24px rgba(36, 194, 255, 0.1);
+  }
+}
+
 @media (max-width: 1080px) {
   .commercial-nav {
     grid-template-columns: 1fr;
@@ -846,6 +880,10 @@ onMounted(() => {
     gap: 12px;
   }
 
+  .commercial-page main > section {
+    scroll-margin-top: 190px;
+  }
+
   .commercial-nav nav {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -864,17 +902,12 @@ onMounted(() => {
 
   .hero-section {
     min-height: auto;
-    padding-top: 42px;
+    padding-top: 210px;
   }
 
   .hero-content h1 {
     font-size: clamp(2.3rem, 10.5vw, 3.2rem);
     line-height: 0.98;
-  }
-
-  .hero-brand {
-    width: min(240px, 74vw);
-    margin-bottom: 18px;
   }
 
   .hero-lead {
