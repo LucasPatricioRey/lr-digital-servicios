@@ -64,8 +64,7 @@ onMounted(() => {
   <div class="commercial-page">
     <header class="commercial-nav" aria-label="Navegacion principal">
       <a class="commercial-logo" href="/" aria-label="Ir al inicio">
-        <span>Lucas Rey</span>
-        <small>LR Digital</small>
+        <img src="/logo-lr-digital-crop.png" alt="LR Digital" />
       </a>
 
       <nav>
@@ -81,6 +80,8 @@ onMounted(() => {
     <main>
       <section id="inicio" class="hero-section">
         <div class="hero-content">
+          <img class="hero-brand" src="/logo-lr-digital-crop.png" alt="LR Digital" />
+
           <p class="section-kicker">
             <Sparkles :size="15" :stroke-width="2.5" aria-hidden="true" />
             Servicios digitales para negocios
@@ -353,21 +354,14 @@ onMounted(() => {
 }
 
 .commercial-logo {
-  display: grid;
-  gap: 2px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.commercial-logo span {
-  font-size: 1rem;
-  font-weight: 900;
-}
-
-.commercial-logo small {
-  color: var(--accent-cold);
-  font-size: 0.72rem;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.commercial-logo img {
+  width: 126px;
+  height: auto;
+  object-fit: contain;
 }
 
 .commercial-nav nav {
@@ -403,6 +397,13 @@ onMounted(() => {
 
 .hero-content {
   max-width: 760px;
+}
+
+.hero-brand {
+  width: min(360px, 72vw);
+  height: auto;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 0 22px rgba(36, 194, 255, 0.2));
 }
 
 .hero-content h1 {
@@ -857,6 +858,10 @@ onMounted(() => {
     font-size: 0.8rem;
   }
 
+  .commercial-logo img {
+    width: 96px;
+  }
+
   .hero-section {
     min-height: auto;
     padding-top: 42px;
@@ -865,6 +870,11 @@ onMounted(() => {
   .hero-content h1 {
     font-size: clamp(2.3rem, 10.5vw, 3.2rem);
     line-height: 0.98;
+  }
+
+  .hero-brand {
+    width: min(240px, 74vw);
+    margin-bottom: 18px;
   }
 
   .hero-lead {

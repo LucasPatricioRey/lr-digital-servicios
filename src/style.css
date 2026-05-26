@@ -28,10 +28,21 @@ body {
   font-family: "Aptos", "Segoe UI", sans-serif;
   color: var(--text);
   background:
+    radial-gradient(circle at 12px 18px, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 42px 62px, rgba(93, 214, 255, 0.34) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 84px 36px, rgba(255, 255, 255, 0.24) 0 1px, transparent 1.5px),
     linear-gradient(120deg, rgba(93, 214, 255, 0.08), transparent 34%),
     linear-gradient(240deg, rgba(255, 122, 24, 0.12), transparent 36%),
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 18px),
     linear-gradient(180deg, #040814 0%, #07111f 45%, #091624 100%);
+  background-size:
+    120px 120px,
+    180px 180px,
+    240px 240px,
+    auto,
+    auto,
+    auto,
+    auto;
 }
 
 body::before {
