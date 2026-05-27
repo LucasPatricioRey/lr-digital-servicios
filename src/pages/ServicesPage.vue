@@ -600,7 +600,7 @@ onMounted(() => {
   margin-top: 28px;
 }
 
-.trust-strip span {
+.trust-strip > span {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -624,7 +624,11 @@ onMounted(() => {
   height: 18px;
   flex: 0 0 auto;
   place-items: center;
+  border: 0;
+  padding: 0;
   color: #25d366;
+  background: transparent;
+  line-height: 0;
 }
 
 .inline-whatsapp-icon :deep(svg) {
@@ -1219,7 +1223,7 @@ onMounted(() => {
     gap: 8px;
   }
 
-  .trust-strip span {
+  .trust-strip > span {
     align-items: center;
     padding: 10px;
     font-size: 0.73rem;
