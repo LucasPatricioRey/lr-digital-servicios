@@ -110,7 +110,6 @@ onMounted(() => {
           </p>
 
           <div class="hero-actions">
-            <WhatsAppButton label="Pedir propuesta" />
             <a href="#servicios" class="action action--secondary">
               <span>Ver servicios</span>
               <ArrowRight :size="18" :stroke-width="2.6" aria-hidden="true" />
@@ -372,8 +371,6 @@ onMounted(() => {
         </div>
       </section>
     </main>
-
-    <WhatsAppButton class="floating-whatsapp" label="WhatsApp" />
   </div>
 </template>
 
@@ -1045,17 +1042,6 @@ onMounted(() => {
     background 0.18s ease;
 }
 
-.floating-whatsapp {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 50;
-  width: auto;
-  max-width: calc(100vw - 36px);
-  min-height: 46px;
-  box-shadow: 0 20px 44px rgba(37, 211, 102, 0.24);
-}
-
 @keyframes navDrop {
   from {
     opacity: 0;
@@ -1254,13 +1240,6 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
 
-  .floating-whatsapp {
-    right: 14px;
-    bottom: 14px;
-    width: auto;
-    max-width: calc(100vw - 28px);
-    min-width: 0;
-  }
 }
 
 @media (max-width: 560px) {
