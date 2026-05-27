@@ -4,7 +4,6 @@ import {
   ArrowRight,
   CalendarCheck,
   CheckCircle2,
-  ChevronDown,
   Clock3,
   FileText,
   MapPin,
@@ -68,18 +67,9 @@ onMounted(() => {
       </a>
 
       <nav class="commercial-nav__links" aria-label="Secciones">
-        <a href="#servicios">
-          <span>Servicios</span>
-          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
-        </a>
-        <a href="#ejemplos">
-          <span>Ejemplos</span>
-          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
-        </a>
-        <a href="#proceso">
-          <span>Proceso</span>
-          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
-        </a>
+        <a href="#servicios">Servicios</a>
+        <a href="#ejemplos">Ejemplos</a>
+        <a href="#proceso">Proceso</a>
         <a href="#precios">Precios</a>
         <a href="#faq">Preguntas</a>
         <a href="#contacto">Contacto</a>
@@ -474,34 +464,25 @@ onMounted(() => {
   background: rgba(255, 255, 255, 0.045);
 }
 
-.commercial-nav__links a svg {
-  opacity: 0.78;
-  transition: transform 0.18s ease;
-}
-
-.commercial-nav__links a:hover svg {
-  transform: translateY(1px);
-}
-
 .commercial-nav__cta.whatsapp-button {
   width: auto;
   min-height: 40px;
   border-radius: 4px;
   padding: 10px 16px;
-  color: #ffffff;
-  background: linear-gradient(135deg, #f2008b, #ff4aa2);
-  box-shadow: 0 14px 32px rgba(242, 0, 139, 0.3);
+  color: #06101c;
+  background: linear-gradient(135deg, #25d366, #8fffb7);
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.22);
 }
 
 .commercial-nav__cta.whatsapp-button:hover {
   transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(37, 211, 102, 0.3);
 }
 
 .commercial-nav__cta :deep(.whatsapp-icon) {
   width: 22px;
   height: 22px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.84);
 }
 
 .commercial-nav__cta :deep(.whatsapp-icon svg) {
