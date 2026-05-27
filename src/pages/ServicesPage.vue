@@ -109,6 +109,12 @@ onMounted(() => {
             entiendan que ofreces y te escriban por WhatsApp.
           </p>
 
+          <ul class="hero-bullets" aria-label="Beneficios principales">
+            <li>Tu negocio se entiende en pocos segundos</li>
+            <li>WhatsApp, redes, ubicacion y servicios bien visibles</li>
+            <li>Propuesta clara, precio definido y entrega ordenada</li>
+          </ul>
+
           <div class="hero-actions">
             <a href="#servicios" class="action action--secondary">
               <span>Ver servicios</span>
@@ -174,6 +180,8 @@ onMounted(() => {
             </div>
           </div>
         </aside>
+
+        <p class="hero-caption">Landing, catalogo o menu digital listo para enviar por WhatsApp</p>
       </section>
 
       <section class="showcase-section">
@@ -380,10 +388,20 @@ onMounted(() => {
   width: 100%;
   max-width: 100vw;
   overflow-x: clip;
+  --accent-hot: #f2008b;
+  background: #03060d;
 }
 
 .commercial-page main > section {
   scroll-margin-top: 118px;
+}
+
+.commercial-page main > section:not(.hero-section) {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin: 0;
+  padding-inline: max(24px, calc((100vw - 1180px) / 2));
 }
 
 .commercial-nav {
@@ -489,6 +507,7 @@ onMounted(() => {
 
 .hero-section {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   display: grid;
   width: 100%;
@@ -511,14 +530,30 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   transform: scale(1.03);
-  filter: saturate(1.05) contrast(1.04);
+  filter: saturate(1.08) contrast(1.05);
+  opacity: 0.9;
+  animation: heroVideoDrift 26s ease-in-out infinite alternate;
 }
 
 .hero-overlay {
   z-index: 0;
   background:
-    linear-gradient(90deg, rgba(3, 7, 14, 0.92) 0%, rgba(3, 7, 14, 0.7) 40%, rgba(3, 7, 14, 0.48) 74%, rgba(3, 7, 14, 0.78) 100%),
-    linear-gradient(180deg, rgba(3, 7, 14, 0.52) 0%, rgba(3, 7, 14, 0.2) 46%, #050a13 100%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(2, 6, 14, 0.78) 36%, rgba(2, 6, 14, 0.48) 70%, rgba(0, 0, 0, 0.8) 100%),
+    linear-gradient(180deg, rgba(3, 7, 14, 0.68) 0%, rgba(3, 7, 14, 0.18) 44%, #03060d 100%);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 62px 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 28%, rgba(93, 214, 255, 0.14) 48%, transparent 72%),
+    repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 42px);
+  opacity: 0.24;
+  mix-blend-mode: screen;
+  animation: heroScan 11s linear infinite;
 }
 
 .hero-section::after {
@@ -555,6 +590,36 @@ onMounted(() => {
   color: var(--muted);
   font-size: clamp(1.02rem, 1vw, 1.16rem);
   line-height: 1.82;
+}
+
+.hero-bullets {
+  display: grid;
+  gap: 8px;
+  max-width: 610px;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-bullets li {
+  position: relative;
+  padding-left: 18px;
+  color: #eef4ff;
+  font-size: 1rem;
+  line-height: 1.55;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+}
+
+.hero-bullets li::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent-cold);
+  box-shadow: 0 0 18px rgba(93, 214, 255, 0.68);
 }
 
 .hero-actions,
@@ -648,13 +713,59 @@ onMounted(() => {
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 38%),
     rgba(9, 16, 28, 0.9);
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
+  animation: panelFloat 8s ease-in-out infinite;
 }
 
 .showcase-section {
+  overflow: hidden;
   display: grid;
+  min-height: 760px;
   grid-template-columns: 0.82fr 1.18fr;
   gap: clamp(30px, 5vw, 58px);
   align-items: center;
+  border-top: 1px solid rgba(148, 163, 184, 0.11);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  background: #02050b;
+}
+
+.showcase-section::before,
+.showcase-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.showcase-section::before {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(2, 5, 11, 0.96) 0%, rgba(2, 5, 11, 0.62) 45%, rgba(2, 5, 11, 0.86) 100%),
+    url("/lr-digital-showcase-workspace.png") center / cover no-repeat;
+  transform: scale(1.04);
+  filter: saturate(1.12) contrast(1.08);
+  animation: imageDrift 24s ease-in-out infinite alternate;
+}
+
+.showcase-section::after {
+  z-index: -1;
+  background:
+    radial-gradient(circle at 72% 42%, rgba(93, 214, 255, 0.17), transparent 30%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 28px);
+  opacity: 0.46;
+}
+
+.showcase-section > *,
+.context-section > *,
+.services-section > *,
+.advice-section > *,
+.projects-section > *,
+.process-section > *,
+.pricing-section > *,
+.industries-section > *,
+.faq-section > *,
+.contact-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .showcase-section__copy h2 {
@@ -685,6 +796,7 @@ onMounted(() => {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(12px);
 }
 
 .showcase-card--large {
@@ -859,6 +971,43 @@ onMounted(() => {
   align-items: start;
 }
 
+.context-section {
+  overflow: hidden;
+  min-height: 720px;
+  align-items: center;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  background: #02050b;
+}
+
+.context-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #02050b 0%, rgba(2, 5, 11, 0.8) 42%, rgba(2, 5, 11, 0.46) 70%, #02050b 100%),
+    url("/lr-digital-showcase-space.png") right center / min(760px, 58vw) no-repeat;
+  opacity: 0.88;
+  filter: saturate(1.05) contrast(1.04);
+}
+
+.context-section::after {
+  content: "";
+  position: absolute;
+  top: 110px;
+  bottom: 110px;
+  left: max(24px, calc((100vw - 1180px) / 2));
+  z-index: -1;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, rgba(93, 214, 255, 0.8) 22%, rgba(93, 214, 255, 0.3) 70%, transparent);
+  box-shadow: 0 0 24px rgba(93, 214, 255, 0.35);
+}
+
+.context-section > div:first-child {
+  padding-left: 38px;
+}
+
 .context-section h2,
 .industries-section h2 {
   font-size: clamp(2rem, 3.4vw, 4rem);
@@ -906,6 +1055,54 @@ onMounted(() => {
   max-width: 860px;
 }
 
+.services-section,
+.projects-section,
+.process-section,
+.pricing-section,
+.faq-section,
+.contact-section,
+.advice-section,
+.industries-section {
+  overflow: hidden;
+  background: #02050b;
+}
+
+.services-section::before,
+.projects-section::before,
+.process-section::before,
+.pricing-section::before,
+.faq-section::before,
+.contact-section::before,
+.advice-section::before,
+.industries-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(93, 214, 255, 0.11), transparent 28%),
+    radial-gradient(circle at 88% 36%, rgba(255, 122, 24, 0.1), transparent 30%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.026) 0 1px, transparent 1px 30px);
+  opacity: 0.72;
+}
+
+.projects-section::before,
+.pricing-section::before {
+  background:
+    linear-gradient(90deg, rgba(2, 5, 11, 0.94), rgba(2, 5, 11, 0.72)),
+    url("/lr-digital-showcase-workspace.png") center / cover no-repeat;
+  opacity: 0.52;
+}
+
+.process-section::before,
+.industries-section::before {
+  background:
+    linear-gradient(90deg, rgba(2, 5, 11, 0.96), rgba(2, 5, 11, 0.68)),
+    url("/lr-digital-showcase-space.png") center / cover no-repeat;
+  opacity: 0.45;
+}
+
 .services-grid,
 .projects-grid,
 .process-grid,
@@ -917,6 +1114,31 @@ onMounted(() => {
 
 .services-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.services-grid :deep(.service-card),
+.projects-grid :deep(.proof-card),
+.process-grid :deep(.process-step),
+.pricing-grid :deep(.pricing-card),
+.faq-grid :deep(.faq-item),
+.contact-section__panel,
+.advice-section__panel {
+  border-color: rgba(148, 163, 184, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 46%),
+    rgba(5, 10, 18, 0.78);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.services-grid :deep(.service-card:hover),
+.projects-grid :deep(.proof-card:hover),
+.process-grid :deep(.process-step:hover),
+.pricing-grid :deep(.pricing-card:hover) {
+  box-shadow:
+    0 34px 95px rgba(0, 0, 0, 0.46),
+    0 0 34px rgba(93, 214, 255, 0.1);
 }
 
 .projects-grid {
@@ -998,6 +1220,19 @@ onMounted(() => {
   font-weight: 760;
 }
 
+.hero-caption {
+  position: absolute;
+  right: max(24px, calc((100vw - 1180px) / 2));
+  bottom: 28px;
+  z-index: 2;
+  max-width: 380px;
+  color: rgba(248, 250, 252, 0.82);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  text-align: right;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
+}
+
 .contact-section {
   padding-top: 48px;
 }
@@ -1055,6 +1290,151 @@ onMounted(() => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroVideoDrift {
+  from {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: scale(1.1) translate3d(-2.2%, 1.4%, 0);
+  }
+}
+
+@keyframes heroScan {
+  from {
+    background-position:
+      -60vw 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      60vw 0,
+      190px 0;
+  }
+}
+
+@keyframes imageDrift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: scale(1.1) translate3d(2%, -1.4%, 0);
+  }
+}
+
+@keyframes panelFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes cardHoverFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content .section-kicker,
+  .hero-content h1,
+  .hero-lead,
+  .hero-bullets,
+  .hero-actions,
+  .trust-strip,
+  .hero-caption {
+    animation: revealUp 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-content h1 {
+    animation-delay: 0.08s;
+  }
+
+  .hero-lead {
+    animation-delay: 0.16s;
+  }
+
+  .hero-bullets {
+    animation-delay: 0.24s;
+  }
+
+  .hero-actions,
+  .trust-strip {
+    animation-delay: 0.32s;
+  }
+
+  .proposal-panel {
+    animation:
+      revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both,
+      panelFloat 8s ease-in-out 1.1s infinite;
+  }
+
+  .showcase-card--large {
+    animation: cardHoverFloat 9s ease-in-out infinite;
+  }
+
+  .showcase-card:not(.showcase-card--large) {
+    animation: cardHoverFloat 10.5s ease-in-out 0.8s infinite;
+  }
+
+  .section-heading,
+  .showcase-section__copy,
+  .showcase-section__media,
+  .context-section > div,
+  .advice-section__panel,
+  .industries-section > div,
+  .industries-list,
+  .contact-section__panel,
+  .services-grid > *,
+  .projects-grid > *,
+  .process-grid > *,
+  .pricing-grid > *,
+  .faq-grid > * {
+    animation: revealUp 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+
+  .services-grid > :nth-child(2),
+  .projects-grid > :nth-child(2),
+  .process-grid > :nth-child(2),
+  .pricing-grid > :nth-child(2),
+  .faq-grid > :nth-child(2) {
+    animation-range: entry 6% cover 32%;
+  }
+
+  .services-grid > :nth-child(3),
+  .process-grid > :nth-child(3),
+  .pricing-grid > :nth-child(3) {
+    animation-range: entry 10% cover 34%;
   }
 }
 
