@@ -79,6 +79,20 @@ onMounted(() => {
 
     <main>
       <section id="inicio" class="hero-section">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/lr-digital-showcase-space.png"
+          aria-hidden="true"
+        >
+          <source src="/lr-digital-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-overlay" aria-hidden="true"></div>
+
         <div class="hero-content">
           <p class="section-kicker">
             <Sparkles :size="15" :stroke-width="2.5" aria-hidden="true" />
@@ -155,6 +169,36 @@ onMounted(() => {
             </div>
           </div>
         </aside>
+      </section>
+
+      <section class="showcase-section">
+        <div class="showcase-section__copy">
+          <p class="section-kicker">Primera impresion</p>
+          <h2>Una web tiene que verse profesional antes de que el cliente pregunte el precio.</h2>
+          <p>
+            La idea no es llenar de tecnologia por llenar. Es presentar tu negocio con una
+            imagen clara, moderna y confiable para que la persona entienda rapido y quiera
+            escribirte.
+          </p>
+        </div>
+
+        <div class="showcase-section__media">
+          <figure class="showcase-card showcase-card--large">
+            <img src="/lr-digital-showcase-space.png" alt="Concepto visual digital para LR Digital" />
+            <figcaption>
+              <span>Imagen de marca</span>
+              <strong>Impacto visual para destacar</strong>
+            </figcaption>
+          </figure>
+
+          <figure class="showcase-card">
+            <img src="/lr-digital-showcase-workspace.png" alt="Ambiente de trabajo digital" />
+            <figcaption>
+              <span>Trabajo personalizado</span>
+              <strong>Desarrollo pensado para cada negocio</strong>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="context-section">
@@ -399,15 +443,53 @@ onMounted(() => {
 }
 
 .hero-section {
+  position: relative;
+  overflow: hidden;
   display: grid;
-  min-height: calc(100vh - 104px);
+  width: 100%;
+  min-height: 100vh;
   grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   align-items: center;
   gap: clamp(36px, 6vw, 78px);
-  padding-top: 142px;
+  padding: 142px max(24px, calc((100vw - 1180px) / 2)) 88px;
+}
+
+.hero-video,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  filter: saturate(1.05) contrast(1.04);
+}
+
+.hero-overlay {
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(3, 7, 14, 0.92) 0%, rgba(3, 7, 14, 0.7) 40%, rgba(3, 7, 14, 0.48) 74%, rgba(3, 7, 14, 0.78) 100%),
+    linear-gradient(180deg, rgba(3, 7, 14, 0.52) 0%, rgba(3, 7, 14, 0.2) 46%, #050a13 100%);
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, #050a13);
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 760px;
 }
 
@@ -488,6 +570,7 @@ onMounted(() => {
 
 .proposal-panel {
   position: relative;
+  z-index: 2;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 8px;
@@ -496,6 +579,92 @@ onMounted(() => {
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 38%),
     rgba(9, 16, 28, 0.9);
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
+}
+
+.showcase-section {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(30px, 5vw, 58px);
+  align-items: center;
+}
+
+.showcase-section__copy h2 {
+  margin-bottom: 16px;
+  font-size: clamp(2rem, 3.4vw, 4rem);
+  line-height: 1.02;
+}
+
+.showcase-section__copy p:not(.section-kicker) {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.78;
+}
+
+.showcase-section__media {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 14px;
+  align-items: end;
+}
+
+.showcase-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+}
+
+.showcase-card--large {
+  min-height: 520px;
+}
+
+.showcase-card img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  filter: saturate(1.04) contrast(1.02);
+  transition: transform 0.5s ease;
+}
+
+.showcase-card:hover img {
+  transform: scale(1.04);
+}
+
+.showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(3, 7, 14, 0.9));
+}
+
+.showcase-card figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1;
+}
+
+.showcase-card figcaption span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent-cold);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.showcase-card figcaption strong {
+  display: block;
+  color: #fff;
+  font-size: 1.18rem;
+  line-height: 1.22;
 }
 
 .proposal-panel::before {
@@ -854,6 +1023,7 @@ onMounted(() => {
   }
 
   .hero-section,
+  .showcase-section,
   .context-section,
   .industries-section,
   .contact-section__panel,
@@ -901,8 +1071,12 @@ onMounted(() => {
   }
 
   .hero-section {
-    min-height: auto;
-    padding-top: 210px;
+    min-height: 100svh;
+    padding: 210px 14px 76px;
+  }
+
+  .proposal-panel {
+    display: none;
   }
 
   .hero-content h1 {
@@ -945,6 +1119,7 @@ onMounted(() => {
 
   .context-section ul,
   .services-grid,
+  .showcase-section__media,
   .projects-grid,
   .process-grid,
   .pricing-grid,
@@ -961,6 +1136,11 @@ onMounted(() => {
 }
 
 @media (max-width: 560px) {
+  .showcase-card,
+  .showcase-card--large {
+    min-height: 380px;
+  }
+
   .proposal-panel__header {
     align-items: flex-start;
     flex-direction: column;
