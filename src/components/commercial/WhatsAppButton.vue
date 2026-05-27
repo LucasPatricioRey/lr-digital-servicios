@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import { MessageCircle, Send } from "@lucide/vue";
 import { getWhatsappUrl } from "../../config/business";
+import WhatsAppIcon from "./WhatsAppIcon.vue";
 
 const props = defineProps({
   label: {
@@ -30,10 +30,9 @@ const whatsappUrl = computed(() => getWhatsappUrl(props.message || undefined));
     aria-label="Pedir propuesta por WhatsApp a Lucas Rey"
   >
     <span class="whatsapp-icon" aria-hidden="true">
-      <MessageCircle :size="18" :stroke-width="2.6" />
+      <WhatsAppIcon />
     </span>
     <span>{{ label }}</span>
-    <Send class="whatsapp-button__arrow" :size="17" :stroke-width="2.6" aria-hidden="true" />
   </a>
 </template>
 
@@ -103,12 +102,9 @@ const whatsappUrl = computed(() => getWhatsappUrl(props.message || undefined));
   background: rgba(255, 255, 255, 0.82);
 }
 
-.whatsapp-button__arrow {
-  transition: transform 0.2s ease;
-}
-
-.whatsapp-button:hover .whatsapp-button__arrow {
-  transform: translate(3px, -2px);
+.whatsapp-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 @media (max-width: 560px) {

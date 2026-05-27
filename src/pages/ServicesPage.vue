@@ -2,13 +2,12 @@
 import { computed, onMounted } from "vue";
 import {
   ArrowRight,
-  BadgeCheck,
   CalendarCheck,
   CheckCircle2,
+  ChevronDown,
   Clock3,
   FileText,
   MapPin,
-  MessageCircle,
   SearchCheck,
   ShieldCheck,
   Sparkles,
@@ -33,6 +32,7 @@ import ProcessStep from "../components/commercial/ProcessStep.vue";
 import ProjectProofCard from "../components/commercial/ProjectProofCard.vue";
 import ServiceCard from "../components/commercial/ServiceCard.vue";
 import WhatsAppButton from "../components/commercial/WhatsAppButton.vue";
+import WhatsAppIcon from "../components/commercial/WhatsAppIcon.vue";
 
 const hasEmail = computed(
   () => businessConfig.email && businessConfig.email !== "AGREGAR_EMAIL"
@@ -67,14 +67,27 @@ onMounted(() => {
         <img src="/logo-lr-digital-crop.png" alt="LR Digital" />
       </a>
 
-      <nav>
-        <a href="#servicios">Servicios</a>
-        <a href="#ejemplos">Ejemplos</a>
-        <a href="#proceso">Proceso</a>
+      <nav class="commercial-nav__links" aria-label="Secciones">
+        <a href="#servicios">
+          <span>Servicios</span>
+          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
+        </a>
+        <a href="#ejemplos">
+          <span>Ejemplos</span>
+          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
+        </a>
+        <a href="#proceso">
+          <span>Proceso</span>
+          <ChevronDown :size="15" :stroke-width="2.5" aria-hidden="true" />
+        </a>
         <a href="#precios">Precios</a>
         <a href="#faq">Preguntas</a>
         <a href="#contacto">Contacto</a>
       </nav>
+
+      <div class="commercial-nav__actions">
+        <WhatsAppButton class="commercial-nav__cta" label="Pedir propuesta" />
+      </div>
     </header>
 
     <main>
@@ -124,7 +137,7 @@ onMounted(() => {
               Entrega rapida
             </span>
             <span>
-              <MessageCircle :size="17" :stroke-width="2.5" aria-hidden="true" />
+              <span class="inline-whatsapp-icon" aria-hidden="true"><WhatsAppIcon /></span>
               WhatsApp directo
             </span>
           </div>
@@ -136,7 +149,10 @@ onMounted(() => {
               <span>LR Digital</span>
               <strong>Plan recomendado</strong>
             </div>
-            <p>Web + WhatsApp</p>
+            <p>
+              <span class="inline-whatsapp-icon" aria-hidden="true"><WhatsAppIcon /></span>
+              Web + WhatsApp
+            </p>
           </div>
 
           <div class="proposal-panel__score">
@@ -374,7 +390,9 @@ onMounted(() => {
 <style scoped>
 .commercial-page {
   position: relative;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 .commercial-page main > section {
@@ -383,63 +401,112 @@ onMounted(() => {
 
 .commercial-nav {
   position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 100;
   display: grid;
-  width: min(1180px, calc(100% - 48px));
-  grid-template-columns: auto 1fr;
+  width: 100%;
+  min-height: 62px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 24px;
-  margin: 0 auto;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 8px;
-  padding: 12px 14px;
-  background:
-    linear-gradient(90deg, rgba(26, 183, 255, 0.08), transparent 24%, rgba(255, 255, 255, 0.05)),
-    rgba(7, 12, 20, 0.9);
+  gap: clamp(18px, 2.4vw, 34px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  padding: 0 max(18px, calc((100vw - 1380px) / 2));
+  background: rgba(2, 3, 10, 0.93);
   box-shadow:
-    0 16px 52px rgba(0, 0, 0, 0.32),
-    0 0 0 1px rgba(36, 194, 255, 0.04);
+    0 16px 42px rgba(0, 0, 0, 0.42),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.035);
   backdrop-filter: blur(18px);
-  animation:
-    navDrop 0.72s cubic-bezier(0.22, 1, 0.36, 1) both,
-    navGlow 4.8s ease-in-out 0.8s infinite;
+  animation: navDrop 0.54s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .commercial-logo {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
 }
 
 .commercial-logo img {
-  width: 126px;
+  width: 140px;
   height: auto;
+  max-height: 50px;
   object-fit: contain;
-  filter: drop-shadow(0 0 12px rgba(36, 194, 255, 0.2));
+  filter: drop-shadow(0 0 14px rgba(36, 194, 255, 0.24));
 }
 
-.commercial-nav nav {
+.commercial-nav__links,
+.commercial-nav__actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 4px;
+  min-width: 0;
+  align-items: center;
 }
 
-.commercial-nav nav a {
-  border-radius: 6px;
-  padding: 10px 11px;
-  color: var(--muted);
+.commercial-nav__links {
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.commercial-nav__actions {
+  justify-content: flex-end;
+}
+
+.commercial-nav__links a {
+  display: inline-flex;
+  min-height: 62px;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 2px solid transparent;
+  padding: 0 13px;
+  color: #eef4ff;
   font-size: 0.9rem;
   font-weight: 760;
+  white-space: nowrap;
   transition:
     color 0.18s ease,
+    border-color 0.18s ease,
     background 0.18s ease;
 }
 
-.commercial-nav nav a:hover {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+.commercial-nav__links a:hover {
+  color: #ffffff;
+  border-color: var(--accent-hot);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.commercial-nav__links a svg {
+  opacity: 0.78;
+  transition: transform 0.18s ease;
+}
+
+.commercial-nav__links a:hover svg {
+  transform: translateY(1px);
+}
+
+.commercial-nav__cta.whatsapp-button {
+  width: auto;
+  min-height: 40px;
+  border-radius: 4px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f2008b, #ff4aa2);
+  box-shadow: 0 14px 32px rgba(242, 0, 139, 0.3);
+}
+
+.commercial-nav__cta.whatsapp-button:hover {
+  transform: translateY(-1px);
+}
+
+.commercial-nav__cta :deep(.whatsapp-icon) {
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.commercial-nav__cta :deep(.whatsapp-icon svg) {
+  width: 15px;
+  height: 15px;
 }
 
 .hero-section {
@@ -447,6 +514,7 @@ onMounted(() => {
   overflow: hidden;
   display: grid;
   width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
   grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   align-items: center;
@@ -490,17 +558,21 @@ onMounted(() => {
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
+  min-width: 0;
   max-width: 760px;
 }
 
 .hero-content h1 {
-  max-width: 820px;
+  max-width: min(820px, 100%);
   margin-bottom: 22px;
   font-size: clamp(2.7rem, 5vw, 5.25rem);
   line-height: 0.95;
+  overflow-wrap: break-word;
 }
 
 .hero-lead {
+  width: 100%;
   max-width: 690px;
   color: var(--muted);
   font-size: clamp(1.02rem, 1vw, 1.16rem);
@@ -566,6 +638,21 @@ onMounted(() => {
 .trust-strip svg {
   flex: 0 0 auto;
   color: var(--accent-cold);
+}
+
+.inline-whatsapp-icon {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: #25d366;
+}
+
+.inline-whatsapp-icon :deep(svg) {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
 }
 
 .proposal-panel {
@@ -691,7 +778,7 @@ onMounted(() => {
   margin-bottom: 28px;
 }
 
-.proposal-panel__header span,
+.proposal-panel__header > div > span,
 .proposal-panel__score small {
   display: block;
   margin-bottom: 6px;
@@ -707,6 +794,9 @@ onMounted(() => {
 }
 
 .proposal-panel__header p {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 1px solid rgba(93, 214, 255, 0.28);
   border-radius: 999px;
   padding: 8px 10px;
@@ -979,6 +1069,8 @@ onMounted(() => {
   right: 18px;
   bottom: 18px;
   z-index: 50;
+  width: auto;
+  max-width: calc(100vw - 36px);
   min-height: 46px;
   box-shadow: 0 20px 44px rgba(37, 211, 102, 0.24);
 }
@@ -986,40 +1078,44 @@ onMounted(() => {
 @keyframes navDrop {
   from {
     opacity: 0;
-    transform: translate(-50%, -18px);
+    transform: translateY(-14px);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-@keyframes navGlow {
-  0%,
-  100% {
-    border-color: rgba(148, 163, 184, 0.18);
-    box-shadow:
-      0 16px 52px rgba(0, 0, 0, 0.32),
-      0 0 0 1px rgba(36, 194, 255, 0.04);
-  }
-
-  50% {
-    border-color: rgba(93, 214, 255, 0.34);
-    box-shadow:
-      0 18px 58px rgba(0, 0, 0, 0.36),
-      0 0 24px rgba(36, 194, 255, 0.1);
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 1080px) {
   .commercial-nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 8px 18px;
+    padding-block: 8px 10px;
   }
 
-  .commercial-nav nav {
-    justify-content: flex-start;
-    flex-wrap: wrap;
+  .commercial-nav__links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    overflow-x: auto;
+    margin-inline: -18px;
+    padding-inline: 18px;
+    scrollbar-width: none;
+  }
+
+  .commercial-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .commercial-nav__links a {
+    min-height: 38px;
+    padding-inline: 12px;
+  }
+
+  .commercial-nav__actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
   }
 
   .hero-section,
@@ -1045,34 +1141,84 @@ onMounted(() => {
 
 @media (max-width: 760px) {
   .commercial-nav {
-    top: 10px;
-    width: min(100% - 20px, 1180px);
-    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 8px 12px 9px;
   }
 
   .commercial-page main > section {
-    scroll-margin-top: 190px;
+    scroll-margin-top: 126px;
   }
 
-  .commercial-nav nav {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
+  .commercial-nav__links {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
   }
 
-  .commercial-nav nav a {
-    padding: 9px 6px;
-    text-align: center;
-    font-size: 0.8rem;
+  .commercial-logo {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .commercial-nav__actions {
+    order: 2;
+    flex: 0 0 auto;
+    max-width: calc(100% - 118px);
+    margin-left: auto;
+  }
+
+  .commercial-nav__links a {
+    min-height: 34px;
+    padding-inline: 10px;
+    font-size: 0.76rem;
   }
 
   .commercial-logo img {
-    width: 96px;
+    width: 106px;
+  }
+
+  .commercial-nav__cta.whatsapp-button {
+    width: auto;
+    max-width: 100%;
+    min-height: 36px;
+    gap: 7px;
+    padding: 8px 11px;
+    font-size: 0.78rem;
+  }
+
+  .commercial-nav__cta :deep(.whatsapp-icon) {
+    width: 19px;
+    height: 19px;
+  }
+
+  .commercial-nav__cta :deep(.whatsapp-icon svg) {
+    width: 13px;
+    height: 13px;
   }
 
   .hero-section {
     min-height: 100svh;
-    padding: 210px 14px 76px;
+    padding: 136px 14px 76px;
+  }
+
+  .hero-content .section-kicker {
+    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    line-height: 1.45;
+  }
+
+  .hero-content .section-kicker::before {
+    width: 28px;
   }
 
   .proposal-panel {
@@ -1080,8 +1226,9 @@ onMounted(() => {
   }
 
   .hero-content h1 {
-    font-size: clamp(2.3rem, 10.5vw, 3.2rem);
-    line-height: 0.98;
+    font-size: clamp(1.92rem, 8.4vw, 2.58rem);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
   }
 
   .hero-lead {
@@ -1101,13 +1248,12 @@ onMounted(() => {
   }
 
   .trust-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 8px;
   }
 
   .trust-strip span {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
     padding: 10px;
     font-size: 0.73rem;
     line-height: 1.25;
@@ -1131,6 +1277,7 @@ onMounted(() => {
     right: 14px;
     bottom: 14px;
     width: auto;
+    max-width: calc(100vw - 28px);
     min-width: 0;
   }
 }

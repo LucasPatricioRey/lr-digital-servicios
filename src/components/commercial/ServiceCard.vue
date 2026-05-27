@@ -1,7 +1,6 @@
 <script setup>
 import { computed } from "vue";
 import {
-  ArrowRight,
   BadgeCheck,
   CreditCard,
   MonitorSmartphone,
@@ -10,6 +9,7 @@ import {
   ShoppingBag
 } from "@lucide/vue";
 import { getWhatsappUrl } from "../../config/business";
+import WhatsAppIcon from "./WhatsAppIcon.vue";
 
 const props = defineProps({
   service: {
@@ -65,8 +65,8 @@ const serviceIcon = computed(() => iconMap[props.service.icon] || MonitorSmartph
       rel="noopener noreferrer"
       :aria-label="`Consultar por ${service.title} por WhatsApp`"
     >
+      <WhatsAppIcon />
       <span>Consultar este servicio</span>
-      <ArrowRight :size="17" :stroke-width="2.7" aria-hidden="true" />
     </a>
   </article>
 </template>
@@ -220,8 +220,10 @@ li::before {
     box-shadow 0.2s ease;
 }
 
-.service-card__cta svg {
-  transition: transform 0.2s ease;
+.service-card__cta :deep(svg) {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
 }
 
 .service-card__cta:hover {
@@ -229,7 +231,4 @@ li::before {
   box-shadow: 0 20px 42px rgba(37, 211, 102, 0.24);
 }
 
-.service-card__cta:hover svg {
-  transform: translateX(3px);
-}
 </style>
